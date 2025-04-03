@@ -1,7 +1,4 @@
 import 'package:flowerring/list/list_page.dart';
-
-import 'package:flowerring/page/detail/detail_page.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
