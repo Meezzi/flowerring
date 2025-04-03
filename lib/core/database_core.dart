@@ -71,4 +71,16 @@ class DatabaseHelper {
       )
     ''');
   }
+
+  /// 데이터 삽입, 조회, 수정, 삭제 기능을 제공하는 함수 모음
+
+  /// 데이터 삽입 함수
+  /// `row`는 추가할 데이터(Map 형식)
+  /// 성공적으로 삽입된 경우, 삽입된 행의 ID를 반환
+  Future<int> insertData(Map<String, dynamic> row) async {
+    final db = await instance.database; // 데이터베이스 인스턴스 가져오기
+    return await db.insert('my_table', row); // 'my_table'에 데이터 삽입
+  }
+
+  
 }
