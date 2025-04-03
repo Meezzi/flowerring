@@ -8,7 +8,6 @@ class DatabaseHelper {
 
   DatabaseHelper._init();
 
-
   ///데이터베이스를 가져오는 함수
   ///이미 데이터베이스가 생성되어 있으면 기존 데이터베이스 반환
   Future<Database> get database async {
@@ -39,6 +38,7 @@ class DatabaseHelper {
         PRODUCT_DESC TEXT NOT NULL
       )
     ''');
+
     //리뷰 테이블 REVIEW_TB
     await db.execute('''
         CREATE TABLE REVIEW_TB (
@@ -50,6 +50,7 @@ class DatabaseHelper {
           FOREIGN KEY (USER_ID) REFERENCES USERS_TB(USER_ID) ON DELETE CASCADE
         )
       ''');
+
     //장바구니 테이블 WISHLIST_TB
     await db.execute('''
       CREATE TABLE WISHLIST_TB (
@@ -60,6 +61,7 @@ class DatabaseHelper {
         FOREIGN KEY (PRODUCT_ID) REFERENCES PRODUCT_TB(PRODUCT_ID) ON DELETE CASCADE
       )
     ''');
+
     //유저 테이블 USER_TB
     await db.execute('''
       CREATE TABLE USER_TB (
