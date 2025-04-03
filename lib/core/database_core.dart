@@ -82,5 +82,10 @@ class DatabaseHelper {
     return await db.insert('my_table', row); // 'my_table'에 데이터 삽입
   }
 
-  
+  /// 데이터 조회 함수
+  /// 테이블의 모든 데이터를 리스트 형태로 반환
+  Future<List<Map<String, dynamic>>> fetchData() async {
+    final db = await instance.database; // 데이터베이스 인스턴스 가져오기
+    return await db.query('my_table'); // 'my_table'의 모든 데이터 가져오기
+  }
 }
