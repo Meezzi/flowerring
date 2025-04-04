@@ -11,13 +11,7 @@ class RegistrationPage extends StatelessWidget {
           },
           icon: Icon(Icons.arrow_back),
         ),
-        title: Text(
-          '상품등록',
-          style: TextStyle(
-            fontSize: 12,
-            color: const Color.fromRGBO(70, 74, 77, 1),
-          ),
-        ),
+        title: Text('상품등록'),
       ),
       body: SafeArea(
         child: Column(
@@ -31,7 +25,7 @@ class RegistrationPage extends StatelessWidget {
                       Container(
                         height: 320,
                         width: double.infinity,
-                        color: Color.fromRGBO(251, 190, 190, 1),
+                        color: Colors.grey[300]!,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -41,7 +35,7 @@ class RegistrationPage extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                                color: const Color.fromRGBO(70, 74, 77, 1),
+                                color: Colors.black,
                               ),
                             ),
                           ],
@@ -84,7 +78,7 @@ class RegistrationPage extends StatelessWidget {
                     ),
                   ),
                   backgroundColor: WidgetStatePropertyAll(
-                    Color.fromRGBO(255, 76, 76, 1),
+                    Color.fromRGBO(255, 118, 118, 1),
                   ),
                   foregroundColor: WidgetStatePropertyAll(Colors.white),
                   textStyle: WidgetStatePropertyAll(
