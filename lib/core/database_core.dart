@@ -123,8 +123,20 @@ class DatabaseHelper {
   }
 
   // ------------------- REVIEW_TB -------------------
-  Future<int> insertReview(Map<String, dynamic> review) async {
+  //리뷰 등록 함수
+  Future<int> insertReview({
+    required int productId,
+    required int userId,
+    required String reviewText,
+    required int reviewRating,
+  }) async {
     final db = await instance.database;
+    final review = {
+      'PRODUCT_ID': productId,
+      'USER_ID': userId,
+      'REVIEW_TEXT': reviewText,
+      'REVIEW_RATING': reviewRating,
+    };
     return await db.insert('REVIEW_TB', review);
   }
 
