@@ -1,3 +1,4 @@
+import 'package:flowerring/model/product.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
@@ -5,11 +6,8 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final item = [
-      Product('assets/sample.jpg', '사과', 10000, 4.5),
-      Product('assets/sample.jpg', '바나나', 10000, 4.5),
-      Product('assets/sample.jpg', '오렌지', 10000, 4.5),
-    ];
+    // Product.getProducts()로 상품 데이터 가져오기
+    final List<Product> items = Product.getProducts(); // 상품 목록 가져오기
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,9 +20,9 @@ class ListPage extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
-        itemCount: item.length,
+        itemCount: items.length,
         itemBuilder: (context, index) {
-          Product product = item[index];
+          Product product = items[index];
           return Container(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             width: double.infinity,
@@ -40,14 +38,4 @@ class ListPage extends StatelessWidget {
       ),
     );
   }
-}
-
-//상품 클래스 생성
-class Product {
-  String imageUrl; //이미지 Ur
-  String title; // 상품명
-  int price; // 상품 가격
-  double rate; // 상품 평점
-  //상품 생성자
-  Product(this.imageUrl, this.title, this.price, this.rate);
 }

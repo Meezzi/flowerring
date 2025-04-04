@@ -1,4 +1,4 @@
-import 'package:flowerring/list/list_page.dart';
+import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
