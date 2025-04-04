@@ -14,7 +14,7 @@ class DetailPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // 뒤로가기
+            Navigator.pop(context);
           },
         ),
 
@@ -22,7 +22,7 @@ class DetailPage extends StatelessWidget {
           '아이폰 15Pro 급처합니다',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        centerTitle: true, // 가운데 정렬 (iOS 스타일)
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.shopping_cart),
