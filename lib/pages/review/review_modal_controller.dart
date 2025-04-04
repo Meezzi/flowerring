@@ -10,11 +10,12 @@ void showReviewModal(
 ) {
   showDialog(
     context: context,
-    builder: (_) => ReviewModal(
-      productId: productId,
-      userId: userId,
-      onClose: onClose,
-      onSubmit: onSubmit,
-    ),
+    builder:
+        (_) => ReviewModal(
+          productId: productId,
+          userId: userId,
+          onClose: onClose,
+          onSubmit: onSubmit,
+        ),
   );
 }

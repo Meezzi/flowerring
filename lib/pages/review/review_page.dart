@@ -19,6 +19,7 @@ class ReviewModal extends StatefulWidget {
   @override
   State<ReviewModal> createState() => _ReviewModalState();
 }
+
 class _ReviewModalState extends State<ReviewModal> {
   int _rating = 0;
   final TextEditingController _reviewController = TextEditingController();
@@ -57,12 +58,13 @@ class _ReviewModalState extends State<ReviewModal> {
                   }
 
                   try {
-                    final insertedId = await DatabaseHelper.instance.insertReview(
-                      productId: widget.productId,
-                      userId: widget.userId,
-                      reviewText: reviewText,
-                      reviewRating: rating,
-                    );
+                    final insertedId = await DatabaseHelper.instance
+                        .insertReview(
+                          productId: widget.productId,
+                          userId: widget.userId,
+                          reviewText: reviewText,
+                          reviewRating: rating,
+                        );
 
                     if (insertedId > 0) {
                       ScaffoldMessenger.of(context).showSnackBar(
