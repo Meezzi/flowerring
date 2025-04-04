@@ -61,4 +61,11 @@ class ItemInCart extends StatelessWidget {
       ],
     );
   }
+
+  Widget _closeButton() {
+    return GestureDetector(
+      onTap: () {},
+      child: Icon(Icons.close, size: 20),
+    );
+  }
 }
