@@ -29,9 +29,23 @@ class RegistrationPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 390,
+                        height: 320,
                         width: double.infinity,
-                        color: Colors.grey[300],
+                        color: Color.fromRGBO(251, 190, 190, 1),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.add_a_photo_rounded, size: 80),
+                            Text(
+                              '사진을 선택해 주세요.',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: const Color.fromRGBO(70, 74, 77, 1),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
