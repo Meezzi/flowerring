@@ -21,7 +21,17 @@ class _ReviewModalState extends State<ReviewModal> {
     return Dialog( // 모달 창 부모 위젯 구성
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: SizedBox(
-        
+        width: 560,
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              buildCloseButton(widget.onClose),
+              const SizedBox(height: 16),
+            ],
+          ),
+        ),
       ),
     );
   }
