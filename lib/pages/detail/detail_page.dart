@@ -7,6 +7,9 @@ class DetailPage extends StatelessWidget {
     int currentRating = 4; // 서버나 DB에서 가져온 상품 별점
 
     return Scaffold(
+      backgroundColor: Colors.white,
+
+      /// 전체 배경 흰색
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
@@ -14,6 +17,7 @@ class DetailPage extends StatelessWidget {
             Navigator.pop(context); // 뒤로가기
           },
         ),
+
         title: const Text(
           '아이폰 15Pro 급처합니다',
           style: TextStyle(fontWeight: FontWeight.bold),
@@ -32,10 +36,13 @@ class DetailPage extends StatelessWidget {
         child: Column(
           children: [
             ///이미지 불러오는 변수 임의 설정(변동가능)
-            Image.asset(
-              'assets/images/iphone.png',
-              height: 250,
-              fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {},
+              child: Image.asset(
+                'assets/images/iphone.png',
+                height: 250,
+                fit: BoxFit.cover,
+              ),
             ),
 
             /// 제목 , 별점 ,가격 + 수량
@@ -70,29 +77,47 @@ class DetailPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.remove),
-                            onPressed: () {},
-                          ),
-                          const Text('1'),
-                          IconButton(
-                            icon: const Icon(Icons.add),
-                            onPressed: () {},
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () {},
+                            ),
+                            const Text('1'),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () {},
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                   SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.only(left: 40), // 왼쪽 여백 0
+                    padding: const EdgeInsets.only(left: 40),
                     child: Align(
-                      alignment: Alignment.centerLeft, // 왼쪽 정렬
-                      child: Text(
-                        '상품설명',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      alignment: Alignment.centerLeft,
+
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              '상품설명',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              '리뷰',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
