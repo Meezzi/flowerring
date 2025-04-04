@@ -14,6 +14,19 @@ class DetailPage extends StatelessWidget {
             Navigator.pop(context); // 뒤로가기
           },
         ),
+        title: const Text(
+          '아이폰 15Pro 급처합니다',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true, // 가운데 정렬 (iOS 스타일)
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart),
+            onPressed: () {
+              // 장바구니 이동 등
+            },
+          ),
+        ],
       ),
       body: Center(
         child: Column(
