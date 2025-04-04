@@ -1,9 +1,8 @@
-// lib/widgets/product_item.dart
 import 'package:flutter/material.dart';
 import 'package:flowerring/model/product.dart';
 
 class ProductItem extends StatelessWidget {
-  final Product product; // Product 객체를 받아옵니다.
+  final Product product;
 
   const ProductItem({super.key, required this.product});
 

@@ -8,7 +8,7 @@ class ListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Product.getProducts()로 상품 데이터 가져오기
-    final List<Product> items = Product.getProducts(); // 상품 목록 가져오기
+    final List<Product> items = Product.getProducts();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
