@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Product {
-  final String imageUrl; // 이미지 URL
-  final String title; // 상품명
-  final int price; // 상품 가격
-  final double rate; // 상품 평점
+  final String imageUrl;
+  final String title;
+  final int price;
+  final double rate;
 
   // 생성자
   Product({
