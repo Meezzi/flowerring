@@ -26,3 +26,20 @@ Widget buildStarRating(int currentRating, ValueChanged<int> onChanged) {
     }),
   );
 }
+
+/// 리뷰 입력창
+Widget buildReviewTextField(TextEditingController controller){
+  return SizedBox(
+    height: 500,
+    child: TextField(
+      controller: controller,
+      maxLines: null,
+      expands: true,
+      decoration: const InputDecoration(
+        hintText: "리뷰 내용을 입력하세요.",
+        border : OutlineInputBorder(),
+        contentPadding: EdgeInsets.only(top : 12, left: 12),
+      ),
+    )
+  );
+}
