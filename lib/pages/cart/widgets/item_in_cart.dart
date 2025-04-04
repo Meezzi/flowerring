@@ -10,7 +10,7 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
-  Widget CountButton() {
+  Widget countButton() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -24,7 +24,6 @@ class ItemInCart extends StatelessWidget {
           child: IconButton(
             icon: const Icon(Icons.remove, size: 16),
             onPressed: () {},
-            padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
         ),
@@ -56,7 +55,6 @@ class ItemInCart extends StatelessWidget {
           child: IconButton(
             icon: const Icon(Icons.add, size: 16),
             onPressed: () {},
-            // padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
         ),
