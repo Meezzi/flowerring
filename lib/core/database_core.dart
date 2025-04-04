@@ -1,10 +1,13 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:uuid/uuid.dart';
+import 'dart:math';
 
 class DatabaseHelper {
   // 싱글톤 패턴 적용: 앱에서 하나의 데이터베이스 인스턴스만 사용하도록 설정
   static final DatabaseHelper instance = DatabaseHelper._init();
   static Database? _database;
+  final uuid = Uuid(); // UUID 생성기
 
   DatabaseHelper._init();
 
@@ -70,6 +73,11 @@ class DatabaseHelper {
         USER_NAME VARCHAR(55) NOT NULL
       )
     ''');
+
+    //초기 유저 데이터 삽입
+    final userSir = uuid.v4();
+    final userName = _generateRandomKoreanName();
+    await db.insert('USER_TB', {'USER_SIR': userSir, 'USER_NAME': userName});
   }
 
   /// 데이터 삽입, 조회, 수정, 삭제 기능을 제공하는 함수 모음
@@ -87,5 +95,15 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> fetchData() async {
     final db = await instance.database; // 데이터베이스 인스턴스 가져오기
     return await db.query('my_table'); // 'my_table'의 모든 데이터 가져오기
+  }
+
+  //랜덤한 한글 닉네임 생성 함수
+  String _generateRandomKoreanName() {
+    final firstname = ['김', '이', '박', '최', '정', '강', '조', '윤', '장', '임'];
+    final names = ['민수', '서연', '지후', '하은', '예준', '수아', '도윤', '지민', '서준', '현우'];
+
+    final rand = Random();
+    return firstname[rand.nextInt(firstname.length)] +
+        names[rand.nextInt(names.length)];
   }
 }
