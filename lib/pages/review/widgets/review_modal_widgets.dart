@@ -8,8 +8,6 @@ Widget buildCloseButton(VoidCallback onClose) {
   );
 }
 
-
-
 /// 별점 위젯
 Widget buildStarRating(int currentRating, ValueChanged<int> onChanged) {
   return Row(
@@ -41,5 +39,24 @@ Widget buildReviewTextField(TextEditingController controller){
         contentPadding: EdgeInsets.only(top : 12, left: 12),
       ),
     )
+  );
+}
+
+/// 리뷰 등록 버튼
+Widget buildSubmitButton({
+  required VoidCallback onPressed,
+  String label = "리뷰 작성",
+}) {
+  return ElevatedButton(
+    onPressed: onPressed,
+    style: ElevatedButton.styleFrom(
+      minimumSize: const Size.fromHeight(55), // 높이 55
+      backgroundColor: const Color(0xFFFF7676), // 배경색
+      foregroundColor: Colors.white, // 텍스트 색
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20), // 둥근 테두리
+      ),
+    ),
+    child: Text(label),
   );
 }
