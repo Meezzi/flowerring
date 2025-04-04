@@ -80,21 +80,88 @@ class DatabaseHelper {
     await db.insert('USER_TB', {'USER_SIR': userSir, 'USER_NAME': userName});
   }
 
-  /// 데이터 삽입, 조회, 수정, 삭제 기능을 제공하는 함수 모음
-
-  /// 데이터 삽입 함수
-  /// `row`는 추가할 데이터(Map 형식)
-  /// 성공적으로 삽입된 경우, 삽입된 행의 ID를 반환
-  Future<int> insertData(Map<String, dynamic> row) async {
-    final db = await instance.database; // 데이터베이스 인스턴스 가져오기
-    return await db.insert('my_table', row); // 'my_table'에 데이터 삽입
+  // ------------------- USER_TB -------------------
+  Future<int> insertUser(Map<String, dynamic> user) async {
+    final db = await instance.database;
+    return await db.insert('USER_TB', user);
   }
 
-  /// 데이터 조회 함수
-  /// 테이블의 모든 데이터를 리스트 형태로 반환
-  Future<List<Map<String, dynamic>>> fetchData() async {
-    final db = await instance.database; // 데이터베이스 인스턴스 가져오기
-    return await db.query('my_table'); // 'my_table'의 모든 데이터 가져오기
+  Future<List<Map<String, dynamic>>> fetchUsers() async {
+    final db = await instance.database;
+    return await db.query('USER_TB');
+  }
+
+  Future<Map<String, dynamic>?> fetchUserBySir(String userSir) async {
+    final db = await instance.database;
+    final result = await db.query(
+      'USER_TB',
+      where: 'USER_SIR = ?',
+      whereArgs: [userSir],
+    );
+    return result.isNotEmpty ? result.first : null;
+  }
+
+  // ------------------- PRODUCT_TB -------------------
+  Future<int> insertProduct(Map<String, dynamic> product) async {
+    final db = await instance.database;
+    return await db.insert('PRODUCT_TB', product);
+  }
+
+  Future<List<Map<String, dynamic>>> fetchProducts() async {
+    final db = await instance.database;
+    return await db.query('PRODUCT_TB');
+  }
+
+  Future<Map<String, dynamic>?> fetchProductById(int productId) async {
+    final db = await instance.database;
+    final result = await db.query(
+      'PRODUCT_TB',
+      where: 'PRODUCT_ID = ?',
+      whereArgs: [productId],
+    );
+    return result.isNotEmpty ? result.first : null;
+  }
+
+  // ------------------- REVIEW_TB -------------------
+  Future<int> insertReview(Map<String, dynamic> review) async {
+    final db = await instance.database;
+    return await db.insert('REVIEW_TB', review);
+  }
+
+  Future<List<Map<String, dynamic>>> fetchReviews() async {
+    final db = await instance.database;
+    return await db.query('REVIEW_TB');
+  }
+
+  Future<List<Map<String, dynamic>>> fetchReviewsByProductId(
+    int productId,
+  ) async {
+    final db = await instance.database;
+    return await db.query(
+      'REVIEW_TB',
+      where: 'PRODUCT_ID = ?',
+      whereArgs: [productId],
+    );
+  }
+
+  // ------------------- WISHLIST_TB -------------------
+  Future<int> insertWishlistItem(Map<String, dynamic> wishlistItem) async {
+    final db = await instance.database;
+    return await db.insert('WISHLIST_TB', wishlistItem);
+  }
+
+  Future<List<Map<String, dynamic>>> fetchWishlist() async {
+    final db = await instance.database;
+    return await db.query('WISHLIST_TB');
+  }
+
+  Future<List<Map<String, dynamic>>> fetchWishlistByUserId(int userId) async {
+    final db = await instance.database;
+    return await db.query(
+      'WISHLIST_TB',
+      where: 'USER_ID = ?',
+      whereArgs: [userId],
+    );
   }
 
   //랜덤한 한글 닉네임 생성 함수
