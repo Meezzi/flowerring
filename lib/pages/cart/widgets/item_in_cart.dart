@@ -19,7 +19,7 @@ class ItemInCart extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey[300]!),
           ),
           child: IconButton(
             icon: const Icon(Icons.remove, size: 16),
@@ -35,8 +35,8 @@ class ItemInCart extends StatelessWidget {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border(
-              top: BorderSide(color: Colors.grey),
-              bottom: BorderSide(color: Colors.grey),
+              top: BorderSide(color: Colors.grey[300]!),
+              bottom: BorderSide(color: Colors.grey[300]!),
             ),
           ),
           child: const Text(
@@ -50,7 +50,7 @@ class ItemInCart extends StatelessWidget {
           width: 36,
           height: 36,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.grey[300]!),
           ),
           child: IconButton(
             icon: const Icon(Icons.add, size: 16),
