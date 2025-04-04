@@ -100,7 +100,7 @@ Widget inputTextField(String label, String hintText) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text(label, style: TextStyle(color: const Color.fromRGBO(70, 74, 77, 1))),
+      Text(label, style: TextStyle(color: Colors.black)),
       SizedBox(height: 4),
       TextField(
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
