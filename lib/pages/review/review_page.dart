@@ -38,8 +38,7 @@ class _ReviewModalState extends State<ReviewModal> {
               const SizedBox(height: 16),
               buildReviewTextField(_reviewController),
               const SizedBox(height: 16),
-
-              buildSubmitButton(onPressed: (){})
+              buildSubmitButton(onPressed: () {}),
             ],
           ),
         ),
