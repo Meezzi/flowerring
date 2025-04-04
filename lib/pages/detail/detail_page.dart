@@ -1,8 +1,11 @@
+import 'package:flowerring/pages/review/widgets/review_modal_widgets.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    int currentRating = 4; // 서버나 DB에서 가져온 상품 별점
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -39,7 +42,7 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   ///별점
-                  Row(children: []),
+                  Row(children: [buildStarRating(currentRating, (_) {})]),
 
                   const SizedBox(height: 8),
 
@@ -69,10 +72,21 @@ class DetailPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40), // 왼쪽 여백 0
+                    child: Align(
+                      alignment: Alignment.centerLeft, // 왼쪽 정렬
+                      child: Text(
+                        '상품설명',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  const Divider(),
                 ],
               ),
             ),
-            const Divider(),
 
             ///상품설명
             Padding(
@@ -80,13 +94,13 @@ class DetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('상품설명', style: TextStyle(fontWeight: FontWeight.bold)),
                   SizedBox(height: 8),
                   Text('사용감 얼마 없는 아이폰 15 PRO'),
                 ],
               ),
             ),
             const Spacer(),
+            const Divider(),
 
             ///하단 장바구니 + 결제 버튼
             Padding(
@@ -101,10 +115,16 @@ class DetailPage extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Color(0xFF7676),
+                        backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
                       ),
                       onPressed: () {},
-                      child: const Text('결제하기'),
+                      child: const Text(
+                        '결제하기',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
