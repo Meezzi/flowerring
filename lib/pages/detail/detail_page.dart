@@ -44,7 +44,69 @@ class DetailPage extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   ///가격 + 수량 조절
-                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        '153,300원',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.remove),
+                            onPressed: () {},
+                          ),
+                          const Text('1'),
+                          IconButton(
+                            icon: const Icon(Icons.add),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+
+            ///상품설명
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  Text('상품설명', style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(height: 8),
+                  Text('사용감 얼마 없는 아이폰 15 PRO'),
+                ],
+              ),
+            ),
+            const Spacer(),
+
+            ///하단 장바구니 + 결제 버튼
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    onPressed: () {},
+                  ),
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: Color(0xFF7676),
+                      ),
+                      onPressed: () {},
+                      child: const Text('결제하기'),
+                    ),
+                  ),
                 ],
               ),
             ),
