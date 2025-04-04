@@ -1,5 +1,4 @@
 import 'package:flowerring/list/list_page.dart';
-import 'package:flowerring/pages/registration/registration_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return MaterialApp(home: ListPage());
-    return MaterialApp(home: RegistrationPage());
+    return MaterialApp(home: ListPage());
   }
 }
