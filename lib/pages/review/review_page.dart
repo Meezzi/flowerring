@@ -35,6 +35,9 @@ class _ReviewModalState extends State<ReviewModal> {
                   _rating = val;
                 });
               }),
+              const SizedBox(height: 16),
+              buildReviewTextField(_reviewController),
+              const SizedBox(height: 16),
             ],
           ),
         ),
