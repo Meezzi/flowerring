@@ -29,7 +29,22 @@ class DetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   ///제목
-                  Text('아이폰 15Pro '),
+                  Text(
+                    '아이폰 15Pro 급처합니다.',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+
+                  ///별점
+                  Row(children: []),
+
+                  const SizedBox(height: 8),
+
+                  ///가격 + 수량 조절
+                  Row(mainAxisAlignment: MainAxisAlignment.spaceBetween),
                 ],
               ),
             ),
