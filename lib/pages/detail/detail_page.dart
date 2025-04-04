@@ -12,6 +12,30 @@ class DetailPage extends StatelessWidget {
           },
         ),
       ),
+      body: Center(
+        child: Column(
+          children: [
+            ///이미지 불러오는 변수 임의 설정(변동가능)
+            Image.asset(
+              'assets/images/iphone.png',
+              height: 250,
+              fit: BoxFit.cover,
+            ),
+
+            /// 제목 , 별점 ,가격 + 수량
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ///제목
+                  Text('아이폰 15Pro '),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
