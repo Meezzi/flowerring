@@ -1,11 +1,34 @@
+import 'package:flowerring/pages/detail/widgets/widget.dart';
 import 'package:flowerring/pages/review/widgets/review_modal_widgets.dart';
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
+  const DetailPage({super.key});
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  late QuantityController quantityController;
+
+  @override
+  void initState() {
+    super.initState();
+    quantityController = QuantityController(unitPrice: 153300);
+    quantityController.addListener(() {
+      setState(() {}); // 수량 or 가격 변경 시 자동 UI 업데이트
+    });
+  }
+
+  @override
+  void dispose() {
+    quantityController.dispose(); // 메모리 누수 방지
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     int currentRating = 4; // 서버나 DB에서 가져온 상품 별점
-
     return Scaffold(
       backgroundColor: Colors.white,
 
@@ -70,10 +93,10 @@ class DetailPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        '153,300원',
+                      Text(
+                        '${quantityController.totalPrice}원',
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -83,12 +106,16 @@ class DetailPage extends StatelessWidget {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.remove),
-                              onPressed: () {},
+                              onPressed: () {
+                                quantityController.decrement;
+                              },
                             ),
-                            const Text('1'),
+                            Text('${quantityController.quantity}'),
                             IconButton(
                               icon: const Icon(Icons.add),
-                              onPressed: () {},
+                              onPressed: () {
+                                quantityController.increment;
+                              },
                             ),
                           ],
                         ),
