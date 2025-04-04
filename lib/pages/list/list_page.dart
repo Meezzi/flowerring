@@ -1,3 +1,5 @@
+import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/list/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
@@ -5,6 +7,8 @@ class ListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Product.getProducts()로 상품 데이터 가져오기
+    final List<Product> items = Product.getProducts();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -15,6 +19,13 @@ class ListPage extends StatelessWidget {
             icon: Icon(Icons.shopping_cart_outlined),
           ),
         ],
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          Product product = items[index];
+          return ProductItem(product: product);
+        },
       ),
     );
   }
