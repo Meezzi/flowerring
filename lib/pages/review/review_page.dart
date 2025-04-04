@@ -17,8 +17,9 @@ class _ReviewModalState extends State<ReviewModal> {
   final TextEditingController _reviewController = TextEditingController();
 
   @override
-  Widget build(BuildContext context){
-    return Dialog( // 모달 창 부모 위젯 구성
+  Widget build(BuildContext context) {
+    return Dialog(
+      // 모달 창 부모 위젯 구성
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: SizedBox(
         width: 560,
@@ -29,6 +30,11 @@ class _ReviewModalState extends State<ReviewModal> {
             children: [
               buildCloseButton(widget.onClose),
               const SizedBox(height: 16),
+              buildStarRating(_rating, (val) {
+                setState(() {
+                  _rating = val;
+                });
+              }),
             ],
           ),
         ),
