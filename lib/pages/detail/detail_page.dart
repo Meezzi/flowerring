@@ -14,6 +14,8 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   late QuantityController quantityController;
 
+  int selectedTabIndex = 0; // 0 = 상품설명, 1 = 리뷰
+
   @override
   void initState() {
     super.initState();
@@ -32,6 +34,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
+
     return Scaffold(
       backgroundColor: Colors.white,
 
@@ -129,32 +132,48 @@ class _DetailPageState extends State<DetailPage> {
                     ],
                   ),
                   SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
 
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              '상품설명',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedTabIndex = 0;
+                          });
+                        },
+                        child: Text(
+                          '상품설명',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color:
+                                selectedTabIndex == 0
+                                    ? Colors.black
+                                    : Colors.grey,
                           ),
-                          SizedBox(width: 20),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              '리뷰',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(width: 100),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedTabIndex = 1;
+                          });
+                        },
+                        child: Text(
+                          '리뷰',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color:
+                                selectedTabIndex == 1
+                                    ? Colors.black
+                                    : Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+
                   const Divider(),
                 ],
               ),
