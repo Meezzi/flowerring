@@ -113,14 +113,14 @@ class _DetailPageState extends State<DetailPage> {
                           IconButton(
                             icon: const Icon(Icons.remove),
                             onPressed: () {
-                              quantityController.decrement;
+                              quantityController.decrement();
                             },
                           ),
                           Text('${quantityController.quantity}'),
                           IconButton(
                             icon: const Icon(Icons.add),
                             onPressed: () {
-                              quantityController.increment;
+                              quantityController.increment();
                             },
                           ),
                         ],

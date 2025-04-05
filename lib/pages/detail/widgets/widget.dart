@@ -12,8 +12,10 @@ class QuantityController extends ChangeNotifier {
   int get totalPrice => _quantity * unitPrice;
 
   void increment() {
-    _quantity++;
-    notifyListeners();
+    if (_quantity < 100) {
+      _quantity++;
+      notifyListeners();
+    }
 
     ///수량과 총 가격 동시에 반영
   }
