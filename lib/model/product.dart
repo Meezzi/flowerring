@@ -18,7 +18,7 @@ class Product {
   static List<Product> getProducts() {
     return [
       Product(
-        imageUrl: 'assets/sample.jpg',
+        imageUrl: 'assets/images/apple.jpg',
         title: '사과',
         price: 10000,
         rate: 4.5,
