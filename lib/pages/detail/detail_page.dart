@@ -88,8 +88,11 @@ class _DetailPageState extends State<DetailPage> {
                   const SizedBox(height: 8),
 
                   ///별점
-                  Row(children: [buildStarRating(product.rate as int, (_) {})]),
+                  Row(
+                    children: [buildStarRating(product.rate.toInt(), (_) {})],
+                  ),
 
+                  ///더블을 인트로 변환 프로덕트와 별점 위젯 변수타입이 다름 나중에 별점 위젯 변수 타입 더블로 바꾸면 될듯
                   const SizedBox(height: 8),
 
                   ///가격 + 수량 조절
