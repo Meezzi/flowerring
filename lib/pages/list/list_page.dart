@@ -1,4 +1,5 @@
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/detail/detail_page.dart';
 import 'package:flowerring/pages/list/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,17 @@ class ListPage extends StatelessWidget {
         itemCount: items.length,
         itemBuilder: (context, index) {
           Product product = items[index];
-          return ProductItem(product: product);
+
+          ///리스트페이지에서 디테일페이지 이동하는 코드
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => DetailPage(product: product)),
+              );
+            },
+            child: ProductItem(product: product),
+          );
         },
       ),
     );
