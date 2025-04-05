@@ -58,12 +58,6 @@ class Product {
         reviewsCount: 0,
         reviewIdList: [],
       ),
-      Product(
-        imageUrl: 'assets/sample.jpg',
-        title: '샤인머스켓',
-        price: 10000,
-        rate: 4.5,
-      ),
     ];
   }
 }
