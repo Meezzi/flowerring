@@ -1,9 +1,12 @@
+import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/detail/widgets/widget.dart';
 import 'package:flowerring/pages/review/widgets/review_modal_widgets.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({super.key});
+  final Product product;
+
+  const DetailPage({super.key, required this.product});
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -14,7 +17,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    quantityController = QuantityController(unitPrice: 153300);
+    quantityController = QuantityController(unitPrice: widget.product.price);
     quantityController.addListener(() {
       setState(() {}); // 수량 or 가격 변경 시 자동 UI 업데이트
     });
@@ -28,7 +31,7 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    int currentRating = 4; // 서버나 DB에서 가져온 상품 별점
+    final product = widget.product;
     return Scaffold(
       backgroundColor: Colors.white,
 
@@ -41,8 +44,8 @@ class _DetailPageState extends State<DetailPage> {
           },
         ),
 
-        title: const Text(
-          '아이폰 15Pro 급처합니다',
+        title: Text(
+          product.title,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -62,7 +65,7 @@ class _DetailPageState extends State<DetailPage> {
             GestureDetector(
               onTap: () {},
               child: Image.asset(
-                'assets/images/iphone.png',
+                product.imageUrl,
                 height: 250,
                 fit: BoxFit.cover,
               ),
@@ -76,7 +79,7 @@ class _DetailPageState extends State<DetailPage> {
                 children: [
                   ///제목
                   Text(
-                    '아이폰 15Pro 급처합니다.',
+                    product.title,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -85,7 +88,7 @@ class _DetailPageState extends State<DetailPage> {
                   const SizedBox(height: 8),
 
                   ///별점
-                  Row(children: [buildStarRating(currentRating, (_) {})]),
+                  Row(children: [buildStarRating(product.rate as int, (_) {})]),
 
                   const SizedBox(height: 8),
 
@@ -137,6 +140,7 @@ class _DetailPageState extends State<DetailPage> {
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           ),
+                          SizedBox(width: 20),
                           GestureDetector(
                             onTap: () {},
                             child: Text(
@@ -160,7 +164,9 @@ class _DetailPageState extends State<DetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   SizedBox(height: 8),
-                  Text('사용감 얼마 없는 아이폰 15 PRO'),
+                  Text('테스트'),
+
+                  ///product.description 이건 나중에
                 ],
               ),
             ),
