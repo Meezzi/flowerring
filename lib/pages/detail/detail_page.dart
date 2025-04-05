@@ -219,7 +219,13 @@ class _DetailPageState extends State<DetailPage> {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  showPaymentConfirmationDialog(
+                    context,
+                    product,
+                    quantityController,
+                  );
+                },
                 child: const Text(
                   '결제하기',
                   style: TextStyle(
