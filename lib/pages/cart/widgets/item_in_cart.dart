@@ -35,6 +35,16 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
+  Widget _checkAndDeleteCartItem() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(children: [Checkbox(value: true, onChanged: null)]),
+        _closeButton(),
+      ],
+    );
+  }
+
   Widget _countValueBox(String count) {
     return Container(
       width: 36,
