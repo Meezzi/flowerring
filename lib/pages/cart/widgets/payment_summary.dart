@@ -17,6 +17,12 @@ class PaymentSummary extends StatelessWidget {
       color: Colors.grey[700],
     );
 
+    final totalLabelStyle = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.bold,
+      color: Colors.grey[900],
+    );
+
     return Column();
   }
 
