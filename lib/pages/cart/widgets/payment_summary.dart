@@ -12,6 +12,8 @@ class PaymentSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final total = productPrice + deliveryFee;
+
     final labelStyle = TextStyle(
       fontSize: 16,
       color: Colors.grey[700],
