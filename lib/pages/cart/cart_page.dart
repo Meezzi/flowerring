@@ -57,6 +57,15 @@ class _CartPageState extends State<CartPage> {
               },
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: _payButton(),
+            ),
+          ),
         ],
       ),
     );
