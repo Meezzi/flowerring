@@ -6,59 +6,47 @@ class ItemInCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: CountButton(),
+      child: _itemCounter(),
     );
   }
 
-  Widget countButton() {
+  Widget _itemCounter() {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        // 마이너스 버튼
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]!),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.remove, size: 16),
-            onPressed: () {},
-            constraints: const BoxConstraints(),
-          ),
-        ),
-
-        // 숫자 표시
-        Container(
-          width: 36,
-          height: 36,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            border: Border(
-              top: BorderSide(color: Colors.grey[300]!),
-              bottom: BorderSide(color: Colors.grey[300]!),
-            ),
-          ),
-          child: const Text(
-            '1',
-            style: TextStyle(fontSize: 14),
-          ),
-        ),
-
-        // 플러스 버튼
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]!),
-          ),
-          child: IconButton(
-            icon: const Icon(Icons.add, size: 16),
-            onPressed: () {},
-            constraints: const BoxConstraints(),
-          ),
-        ),
+        _quantityStepButton(Icons.remove),
+        _countValueBox('1'),
+        _quantityStepButton(Icons.add),
       ],
+    );
+  }
+
+  Widget _quantityStepButton(IconData icon) {
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: IconButton(
+        icon: Icon(icon, size: 16),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget _countValueBox(String count) {
+    return Container(
+      width: 36,
+      height: 36,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Colors.grey[300]!),
+          bottom: BorderSide(color: Colors.grey[300]!),
+        ),
+      ),
+      child: Text(count, style: const TextStyle(fontSize: 14)),
     );
   }
 
