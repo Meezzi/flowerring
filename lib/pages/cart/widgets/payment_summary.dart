@@ -12,6 +12,11 @@ class PaymentSummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labelStyle = TextStyle(
+      fontSize: 16,
+      color: Colors.grey[700],
+    );
+
     return Column();
   }
 
