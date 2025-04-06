@@ -20,6 +20,17 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
+  Widget _itemTitle() {
+    return Text(
+      '아이폰 15PRO 금처합니다.',
+      style: TextStyle(fontWeight: FontWeight.bold),
+    );
+  }
+
+  Widget _itemPrice() {
+    return Text('₩153,300');
+  }
+
   Widget _itemCounter() {
     return Row(
       mainAxisSize: MainAxisSize.min,
