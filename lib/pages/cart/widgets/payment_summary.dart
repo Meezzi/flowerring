@@ -14,4 +14,14 @@ class PaymentSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column();
   }
+
+  Widget _priceRow(String label, int value, TextStyle style) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: style),
+        Text(value.toString(), style: style),
+      ],
+    );
+  }
 }
