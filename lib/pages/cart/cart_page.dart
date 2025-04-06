@@ -19,7 +19,7 @@ class _CartPageState extends State<CartPage> {
         title: Text('장바구니'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
         ),
       ),
     );
