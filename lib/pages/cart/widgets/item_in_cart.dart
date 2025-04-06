@@ -5,7 +5,32 @@ class ItemInCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: _itemCounter());
+    return Column(
+      children: [
+        _checkAndDeleteCartItem(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _productImage(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _itemTitle(),
+                SizedBox(height: 20),
+                _itemPrice(),
+              ],
+            ),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [SizedBox(height: 40), _itemCounter()],
+            ),
+          ],
+        ),
+      ],
+    );
   }
 
   Widget _productImage() {
