@@ -17,7 +17,10 @@ class _CartPageState extends State<CartPage> {
         // Android에서는 title이 왼쪽 정렬되기 때문에 centerTitle을 true로 설정
         centerTitle: true,
         title: Text('장바구니'),
-        leading: Icon(Icons.arrow_back),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {},
+        ),
       ),
     );
   }
