@@ -53,7 +53,7 @@ class ItemInCart extends StatelessWidget {
   }
 
   Widget _itemPrice() {
-    return Text('₩153,300');
+    return Text('153,300원');
   }
 
   Widget _itemCounter() {
