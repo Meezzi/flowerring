@@ -5,8 +5,18 @@ class ItemInCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _itemCounter(),
+    return Container(child: _itemCounter());
+  }
+
+  Widget _productImage() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8),
+      child: Image.asset(
+        'assets/images/bag.png',
+        width: 80,
+        height: 80,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
