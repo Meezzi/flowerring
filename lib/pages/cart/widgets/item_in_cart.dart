@@ -24,7 +24,7 @@ class ItemInCart extends StatelessWidget {
                 children: [
                   _itemTitle(item.product.title),
                   SizedBox(height: 20),
-                  _itemPrice(item.product.price),
+                  _itemPrice(item.product.price * item.quantity),
                 ],
               ),
             ),
