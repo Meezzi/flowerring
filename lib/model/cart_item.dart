@@ -2,7 +2,7 @@ import 'package:flowerring/model/product.dart';
 
 class CartItem {
   final Product product;
-  final int quantity;
+  int quantity;
 
   CartItem({required this.product, required this.quantity});
 }
@@ -26,5 +26,18 @@ class Cart {
 
   void addProduct(Product product, int quantity) {
     _itemsInCart.add(CartItem(product: product, quantity: quantity));
+  }
+
+  void removeProduct(CartItem product) {
+    _itemsInCart.remove(product);
+  }
+
+  int getTotalPrice() {
+    int totalPrice = 0;
+
+    for(final item in items) {
+      totalPrice += item.product.price * item.quantity;
+    }
+    return totalPrice;
   }
 }
