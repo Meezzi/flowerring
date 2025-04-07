@@ -37,6 +37,7 @@ class ProductItem extends StatelessWidget {
                     Text('${product.rate}'),
                   ],
                 ),
+                Text('${product.price}'),
               ],
             ),
           ),
