@@ -31,7 +31,7 @@ class ItemInCart extends StatelessWidget {
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [SizedBox(height: 40), _itemCounter()],
+              children: [SizedBox(height: 40), _itemCounter(item.quantity)],
             ),
           ],
         ),
@@ -64,12 +64,12 @@ class ItemInCart extends StatelessWidget {
     return Text('$price원');
   }
 
-  Widget _itemCounter() {
+  Widget _itemCounter(int quantity) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         _quantityStepButton(Icons.remove),
-        _countValueBox('1'),
+        _countValueBox(quantity),
         _quantityStepButton(Icons.add),
       ],
     );
@@ -107,7 +107,7 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
-  Widget _countValueBox(String count) {
+  Widget _countValueBox(int quantity) {
     return Container(
       width: 36,
       height: 36,
@@ -118,7 +118,7 @@ class ItemInCart extends StatelessWidget {
           bottom: BorderSide(color: Colors.grey[300]!),
         ),
       ),
-      child: Text(count, style: const TextStyle(fontSize: 14)),
+      child: Text('$quantity', style: const TextStyle(fontSize: 14)),
     );
   }
 
