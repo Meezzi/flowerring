@@ -11,6 +11,15 @@ class ProductTextfield extends StatefulWidget {
 }
 
 class _ProductTextField extends State<ProductTextfield> {
+  final TextEditingController myController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    myController.addListener(() {
+      print(myController.text);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -20,6 +29,7 @@ class _ProductTextField extends State<ProductTextfield> {
         Text(widget.label, style: TextStyle(color: Colors.black)),
         SizedBox(height: 4),
         TextField(
+          controller: myController,
           style: TextStyle(fontSize: 18),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
