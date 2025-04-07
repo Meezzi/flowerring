@@ -1,4 +1,6 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +56,8 @@ void showPaymentConfirmationDialog(
           CupertinoDialogAction(
             child: Text('확인'),
             onPressed: () {
-              Navigator.of(context).pop(); // 첫 번째 팝업 닫기
+              Navigator.of(context).pop(); // 첫 번째 팝업
+
               showCupertinoDialog(
                 context: context,
                 builder: (context) {

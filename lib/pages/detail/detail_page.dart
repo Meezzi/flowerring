@@ -55,12 +55,21 @@ class _DetailPageState extends State<DetailPage> {
         ),
         centerTitle: true,
         actions: [
+          Text(
+            quantityController.quantity > 1
+                ? '${quantityController.quantity}'
+                : '',
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black54,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              Cart().addProduct(product, quantityController.quantity);
-
               ///싱글톤 카드에 추가
+              Cart().addProduct(product, quantityController.quantity);
 
               // 장바구니 이동
               Navigator.push(
@@ -97,38 +106,59 @@ class _DetailPageState extends State<DetailPage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () {
-                Cart().addProduct(product, quantityController.quantity);
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  onPressed: () {
+                    ///싱글톤 카드에 추가
+                    Cart().addProduct(product, quantityController.quantity);
 
-                ///싱글톤 카드에 추가
-
-                // 장바구니 이동
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const CartPage()),
-                );
-              },
-            ),
-            Expanded(
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
-                  foregroundColor: Colors.white,
+                    // 장바구니 이동
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const CartPage()),
+                    );
+                  },
                 ),
-                onPressed: () {
-                  showPaymentConfirmationDialog(
-                    context,
-                    product,
-                    quantityController,
-                  );
-                },
-                child: const Text(
-                  '결제하기',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+
+                Text(
+                  quantityController.quantity > 1
+                      ? '${quantityController.quantity}'
+                      : '',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black54,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(width: 12),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 13),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    showPaymentConfirmationDialog(
+                      context,
+                      product,
+                      quantityController,
+                    );
+                  },
+                  child: const Text(
+                    '결제하기',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ),
