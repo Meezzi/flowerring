@@ -31,6 +31,7 @@ class ProductTextField extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType,
           maxLines: maxLines,
+          maxLength: maxLength,
           style: TextStyle(fontSize: 18),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
