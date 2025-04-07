@@ -1,3 +1,4 @@
+import 'package:flowerring/utils/format_price.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/model/product.dart';
 
@@ -44,7 +45,7 @@ class ProductItem extends StatelessWidget {
                     ),
                     SizedBox(width: 150),
                     Text(
-                      '${product.price}원',
+                      '${formatPrice(product.price)}원',
                       style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
