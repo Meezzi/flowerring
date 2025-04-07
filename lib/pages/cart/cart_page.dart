@@ -15,9 +15,9 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    final cartItems = Cart().items; // 싱글톤 Cart에서 가져오기
-    final itemCount = cartItems.length;
-    final int productPrice = Cart().getTotalPrice();
+    final cart = Cart();
+    final cartItems = cart.items;
+    final productPrice = cart.getTotalPrice();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -34,45 +34,10 @@ class _CartPageState extends State<CartPage> {
         // 스크롤해도 색상이 달라지지 않도록 설정
         scrolledUnderElevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: itemCount + 1,
-              itemBuilder: (context, index) {
-                if (index == itemCount) {
-                  // item이 모두 표시되면 마지막으로 결제 정보 표시
-                  return Column(
-                    children: [
-                      PaymentSummary(
-                        productPrice: productPrice,
-                        deliveryFee: deliveryFee,
-                      ),
-                    ],
-                  );
-                }
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: ItemInCart(
-                    item: cartItems[index],
-                    onCartChanged: () => setState(() {}),
-                  ),
-                );
-              },
-            ),
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 12.0,
-              bottom: 12.0,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: _payButton(),
-            ),
+      body:
+          cartItems.isEmpty
+              ? _emptyCartMessage()
+              : _itemInCart(cartItems, productPrice),
     );
   }
 
@@ -89,6 +54,48 @@ class _CartPageState extends State<CartPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _itemInCart(List<CartItem> cartItems, int productPrice) {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            itemCount: cartItems.length + 1,
+            itemBuilder: (context, index) {
+              if (index == cartItems.length) {
+                // item이 모두 표시되면 마지막으로 결제 정보 표시
+                return Column(
+                  children: [
+                    PaymentSummary(
+                      productPrice: productPrice,
+                      deliveryFee: deliveryFee,
+                    ),
+                  ],
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: ItemInCart(
+                  item: cartItems[index],
+                  onCartChanged: () => setState(() {}),
+                ),
+              );
+            },
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            bottom: 12.0,
+          ),
+          child: SizedBox(width: double.infinity, child: _payButton()),
+        ),
+      ],
     );
   }
 
