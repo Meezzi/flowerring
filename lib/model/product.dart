@@ -5,6 +5,7 @@ class Product {
   final int price;
   final double rate;
   final int reviewsCount;
+  final List<int> reviewIdList;
 
   // 생성자
   Product({
@@ -14,6 +15,7 @@ class Product {
     required this.price,
     required this.rate,
     required this.reviewsCount,
+    required this.reviewIdList,
   });
 
   // 상품 데이터를 반환하는 메소드
@@ -26,6 +28,7 @@ class Product {
         price: 10000,
         rate: 4.5,
         reviewsCount: 0,
+        reviewIdList: [],
       ),
       Product(
         imageUrl: 'assets/sample.jpg',
@@ -34,6 +37,7 @@ class Product {
         price: 10000,
         rate: 4.5,
         reviewsCount: 0,
+        reviewIdList: [],
       ),
       Product(
         imageUrl: 'assets/sample.jpg',
@@ -42,6 +46,7 @@ class Product {
         price: 10000,
         rate: 4.5,
         reviewsCount: 0,
+        reviewIdList: [],
       ),
     ];
   }
