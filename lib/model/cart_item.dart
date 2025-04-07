@@ -1,4 +1,5 @@
 import 'package:flowerring/model/product.dart';
+import 'package:collection/collection.dart';
 
 class CartItem {
   final Product product;
@@ -25,6 +26,9 @@ class Cart {
   List<CartItem> get items => _itemsInCart;
 
   void addProduct(Product product, int quantity) {
+    final existingItem = _itemsInCart.firstWhereOrNull(
+      (item) => item.product.id == product.id,
+    );
     _itemsInCart.add(CartItem(product: product, quantity: quantity));
   }
 
@@ -35,7 +39,7 @@ class Cart {
   int getTotalPrice() {
     int totalPrice = 0;
 
-    for(final item in items) {
+    for (final item in items) {
       totalPrice += item.product.price * item.quantity;
     }
     return totalPrice;
