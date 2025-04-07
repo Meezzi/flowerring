@@ -60,9 +60,7 @@ class _DetailPageState extends State<DetailPage> {
               // 장바구니 이동
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => CartPage(cartItems: [product]),
-                ),
+                MaterialPageRoute(builder: (_) => CartPage()),
               );
             },
           ),
@@ -101,9 +99,7 @@ class _DetailPageState extends State<DetailPage> {
                 // 장바구니 이동
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (_) => CartPage(cartItems: [product]),
-                  ),
+                  MaterialPageRoute(builder: (_) => CartPage()),
                 );
               },
             ),
