@@ -16,6 +16,19 @@ class ItemInCart extends StatefulWidget {
 }
 
 class _ItemInCartState extends State<ItemInCart> {
+  void _changeQuantity(bool increment) {
+    setState(() {
+      if (increment) {
+        widget.item.quantity++;
+      } else {
+        if (widget.item.quantity > 1) {
+          widget.item.quantity--;
+        }
+      }
+    });
+    widget.onCartChanged();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
