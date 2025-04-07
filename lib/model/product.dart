@@ -28,7 +28,7 @@ class Product {
       Product(
         id: 1,
         stock: 5,
-        imageUrl: 'assets/sample.jpg',
+        imageUrl: 'assets/images/apple.jpg',
         title: '사과',
         content: '맛있는 사과입니다.',
         price: 10000,
