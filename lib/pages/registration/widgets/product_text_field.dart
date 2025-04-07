@@ -8,6 +8,7 @@ class ProductTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final int maxLines;
   final int maxLength;
+  final GlobalKey<FormState>? formKey;
 
   const ProductTextField({
     super.key,
@@ -18,6 +19,7 @@ class ProductTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
     this.maxLength = 15,
+    this.formKey,
   });
 
   @override
@@ -38,6 +40,12 @@ class ProductTextField extends StatelessWidget {
             hintText: hintText,
           ),
           validator: validator,
+          onChanged: (_) {
+            // 입력값이 바뀌면 유효성 검사 다시 실행
+            if (formKey != null && formKey!.currentState != null) {
+              formKey!.currentState!.validate();
+            }
+          },
         ),
       ],
     );

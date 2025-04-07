@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flowerring/pages/registration/widgets/product_imgage_selector.dart';
 import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
@@ -27,25 +28,44 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   // form 관련 변수
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final _titleController = TextEditingController();
   final _stockController = TextEditingController();
-  final _descriptionController = TextEditingController();
+  final _contentController = TextEditingController();
   final _priceController = TextEditingController();
 
   @override
   void dispose() {
     // 메모리 정리
-    _nameController.dispose();
+    _titleController.dispose();
     _stockController.dispose();
-    _descriptionController.dispose();
+    _contentController.dispose();
     _priceController.dispose();
 
     super.dispose();
   }
 
   void _submitForm() {
+    if (_selectedImage == null) {
+      // 사진을 선택하지 않았으면
+      showDialog(
+        context: context,
+        builder:
+            (_) => AlertDialog(
+              title: Text('입력 오류'),
+              content: Text('사진을 선택해 주세요!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('확인'),
+                ),
+              ],
+            ),
+      );
+    }
     // 유효성 검사에 성공하면!
-    if (_formKey.currentState!.validate()) {
+    else if (_formKey.currentState!.validate()) {
       showDialog(
         context: context,
         builder:
@@ -55,6 +75,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
               actions: [
                 TextButton(
                   onPressed: () {
+                    final title = _titleController.text;
+                    final stock = _stockController.text;
+                    final content = _contentController.text;
+                    final price = _priceController.text;
+
+                    Product product = Product(
+                      id: 1,
+                      title: title,
+                      stock: int.tryParse(stock)!,
+                      imageUrl: _selectedImage!,
+                      content: content,
+                      price: int.tryParse(price)!,
+                      rate: 0,
+                      reviewsCount: 0,
+                      reviewIdList: [],
+                    );
+                    print(product);
+                    Navigator.pop(context);
                     Navigator.pop(context);
                   },
                   child: Text('확인'),
@@ -73,15 +111,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    final name = _nameController.text;
-                    final stock = _stockController.text;
-                    final description = _descriptionController.text;
-                    final price = _priceController.text;
-
-                    print('상품명: $name');
-                    print('재고: $stock');
-                    print('설명: $description');
-                    print('가격: $price');
                     Navigator.pop(context);
                   },
                   child: Text('확인'),
@@ -128,8 +157,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ProductTextField(
                                 label: '상품명',
                                 hintText: '상품명을 입력해 주세요',
-                                controller: _nameController,
-                                validator: nameValidator,
+                                controller: _titleController,
+                                validator: titleValidator,
+                                formKey: _formKey,
                               ),
                               SizedBox(height: 12),
                               ProductTextField(
@@ -138,6 +168,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 controller: _priceController,
                                 keyboardType: TextInputType.number,
                                 validator: priceValidator,
+                                formKey: _formKey,
                               ),
                               SizedBox(height: 12),
                               ProductTextField(
@@ -146,15 +177,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 controller: _stockController,
                                 keyboardType: TextInputType.number,
                                 validator: stockValidator,
+                                formKey: _formKey,
                               ),
                               SizedBox(height: 12),
                               ProductTextField(
                                 label: '상품설명',
                                 hintText: '상품설명을 입력해 주세요.',
-                                controller: _descriptionController,
-                                validator: descriptionValidator,
+                                controller: _contentController,
+                                validator: contentValidator,
                                 maxLines: 7,
                                 maxLength: 300,
+                                formKey: _formKey,
                               ),
                               SizedBox(height: 12),
                             ],
@@ -198,7 +231,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  String? nameValidator(String? value) {
+  String? titleValidator(String? value) {
     if (value == null || value.trim().isEmpty) {
       return '상품명을 입력해 주세요!';
     }
@@ -233,7 +266,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return null;
   }
 
-  String? descriptionValidator(String? value) {
+  String? contentValidator(String? value) {
     if (value == null || value.isEmpty) {
       return '상품설명을 입력해 주세요';
     }
