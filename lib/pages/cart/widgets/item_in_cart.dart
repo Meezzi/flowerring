@@ -16,14 +16,17 @@ class ItemInCart extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _productImage(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _itemTitle(item.product.title),
-                SizedBox(height: 20),
-                _itemPrice(item.product.price),
-              ],
+            SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _itemTitle(item.product.title),
+                  SizedBox(height: 20),
+                  _itemPrice(item.product.price),
+                ],
+              ),
             ),
 
             Column(
