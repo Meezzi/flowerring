@@ -1,4 +1,6 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +58,15 @@ class _DetailPageState extends State<DetailPage> {
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
-              // 장바구니 이동 등
+              Cart().addProduct(product, quantityController.quantity);
+
+              ///싱글톤 카드에 추가
+
+              // 장바구니 이동
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const CartPage()),
+              );
             },
           ),
         ],
@@ -76,9 +86,10 @@ class _DetailPageState extends State<DetailPage> {
             onTabChanged: (index) => setState(() => selectedTabIndex = index),
           ),
 
-          DetailContentView(tabIndex: selectedTabIndex, product: product),
-
           ///상세페이지 상품 설명 리뷰 설명
+          DetailContentView(tabIndex: selectedTabIndex, product: product),
+          SizedBox(height: 30),
+          Divider(height: 1),
         ],
       ),
 
@@ -87,7 +98,20 @@ class _DetailPageState extends State<DetailPage> {
         padding: const EdgeInsets.all(16),
         child: Row(
           children: [
-            IconButton(icon: const Icon(Icons.shopping_cart), onPressed: () {}),
+            IconButton(
+              icon: const Icon(Icons.shopping_cart),
+              onPressed: () {
+                Cart().addProduct(product, quantityController.quantity);
+
+                ///싱글톤 카드에 추가
+
+                // 장바구니 이동
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CartPage()),
+                );
+              },
+            ),
             Expanded(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(

@@ -1,3 +1,5 @@
+import 'package:flowerring/model/cart_item.dart';
+import 'package:flowerring/model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
@@ -16,6 +18,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final cartItems = Cart().items; // 싱글톤 Cart에서 가져오기
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,7 +32,7 @@ class _CartPageState extends State<CartPage> {
         ),
         backgroundColor: Colors.white,
         // 스크롤해도 색상이 달라지지 않도록 설정
-        scrolledUnderElevation: 0
+        scrolledUnderElevation: 0,
       ),
       body: Column(
         children: [
@@ -63,10 +66,7 @@ class _CartPageState extends State<CartPage> {
               right: 12.0,
               bottom: 12.0,
             ),
-            child: SizedBox(
-              width: double.infinity,
-              child: _payButton(),
-            ),
+            child: SizedBox(width: double.infinity, child: _payButton()),
           ),
         ],
       ),
@@ -79,9 +79,7 @@ class _CartPageState extends State<CartPage> {
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromRGBO(255, 118, 118, 1.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: const Text(
         '결제하기',
