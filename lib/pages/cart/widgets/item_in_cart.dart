@@ -29,6 +29,11 @@ class _ItemInCartState extends State<ItemInCart> {
     widget.onCartChanged();
   }
 
+  void _removeProduct() {
+    Cart().removeProduct(widget.item);
+    widget.onCartChanged();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
