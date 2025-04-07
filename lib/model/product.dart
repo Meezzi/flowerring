@@ -39,7 +39,7 @@ class Product {
       Product(
         id: 2,
         stock: 5,
-        imageUrl: 'assets/sample.jpg',
+        imageUrl: 'assets/images/sample.jpg',
         title: '바나나',
         content: '맛있는 바나나입니다..',
         price: 10000,
@@ -50,7 +50,7 @@ class Product {
       Product(
         id: 3,
         stock: 5,
-        imageUrl: 'assets/sample.jpg',
+        imageUrl: 'assets/images/sample.jpg',
         title: '오렌지',
         content: '맛있는 오렌지입니다.',
         price: 10000,
