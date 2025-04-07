@@ -74,10 +74,7 @@ class ItemInCart extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
       ),
-      child: IconButton(
-        icon: Icon(icon, size: 16),
-        onPressed: () {},
-      ),
+      child: IconButton(icon: Icon(icon, size: 16), onPressed: () {}),
     );
   }
 
@@ -85,7 +82,18 @@ class ItemInCart extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(children: [Checkbox(value: true, onChanged: null)]),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 24,
+                height: 24,
+                child: Checkbox(value: true, onChanged: null),
+              ),
+            ],
+          ),
+        ),
         _closeButton(),
       ],
     );
