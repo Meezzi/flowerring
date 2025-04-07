@@ -11,13 +11,23 @@ class ProductItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       width: double.infinity,
-      height: 50,
+      height: 80,
       decoration: BoxDecoration(
         color: Colors.transparent,
+        borderRadius: BorderRadius.circular(15),
         border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
       ),
-      alignment: Alignment.centerLeft,
-      child: Text(product.title),
+      child: Row(
+        children: [
+          ClipRect(
+            child: AspectRatio(
+              aspectRatio: 1, // 1:1 비율로 설정
+              child: Image.network(product.imageUrl, fit: BoxFit.cover),
+            ),
+          ),
+          const SizedBox(width: 10),
+        ],
+      ),
     );
   }
 }
