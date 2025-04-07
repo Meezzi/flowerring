@@ -29,7 +29,12 @@ class Cart {
     final existingItem = _itemsInCart.firstWhereOrNull(
       (item) => item.product.id == product.id,
     );
-    _itemsInCart.add(CartItem(product: product, quantity: quantity));
+
+    if (existingItem != null) {
+      existingItem.quantity += quantity;
+    } else {
+      _itemsInCart.add(CartItem(product: product, quantity: quantity));
+    }
   }
 
   void removeProduct(CartItem product) {
