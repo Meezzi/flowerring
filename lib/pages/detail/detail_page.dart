@@ -1,5 +1,6 @@
 import 'package:flowerring/model/product.dart';
-import 'package:flowerring/pages/detail/widgets/widget.dart';
+import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
+import 'package:flowerring/pages/detail/widgets/product_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
