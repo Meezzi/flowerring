@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flowerring/pages/list/list_page.dart';
+import 'package:flowerring/pages/registration/widgets/product_imgage_selector.dart';
 import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -17,31 +18,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
     'assets/images/nike_phantom_gx.png',
     'assets/images/sample.jpg',
   ];
-  String? selectedImage;
-
-  void _showRandomImage() {
-    showDialog(
-      context: context,
-      builder:
-          (_) => AlertDialog(
-            title: Text('사진선택 완료'),
-            content: Text('사진이 성공적으로 선택되었습니다.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  final random = Random();
-                  final newImage =
-                      imagePaths[random.nextInt(imagePaths.length)];
-                  setState(() {
-                    selectedImage = newImage;
-                  });
-                },
-                child: Text('확인'),
-              ),
-            ],
-          ),
-    );
+  String? _selectedImage;
+  void onImageSelected(imagePath) {
+    setState(() {
+      _selectedImage = imagePath;
+    });
   }
 
   // form 관련 변수
@@ -96,6 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     final stock = _stockController.text;
                     final description = _descriptionController.text;
                     final price = _priceController.text;
+
                     print('상품명: $name');
                     print('재고: $stock');
                     print('설명: $description');
@@ -132,34 +114,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        height: 320,
-                        width: double.infinity,
-                        color: Colors.grey[300]!,
-                        child:
-                            selectedImage == null
-                                ? GestureDetector(
-                                  onTap: _showRandomImage,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.add_a_photo_rounded, size: 80),
-                                      Text(
-                                        '사진을 선택해 주세요.',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                                : Image.asset(
-                                  selectedImage!,
-                                  fit: BoxFit.cover,
-                                ),
-                      ),
+                      ProductImgageSelector(onImageSelected: onImageSelected),
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16,
