@@ -55,7 +55,11 @@ class _CartPageState extends State<CartPage> {
           ),
 
           Padding(
-            padding: const EdgeInsets.all(12.0),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 12.0,
+              bottom: 12.0,
+            ),
             child: SizedBox(
               width: double.infinity,
               child: _payButton(),
