@@ -1,4 +1,5 @@
 class Product {
+  final int id;
   final String imageUrl;
   final String title;
   final String content;
@@ -9,6 +10,7 @@ class Product {
 
   // 생성자
   Product({
+    required this.id,
     required this.imageUrl,
     required this.title,
     required this.content,
@@ -22,6 +24,7 @@ class Product {
   static List<Product> getProducts() {
     return [
       Product(
+        id: 1,
         imageUrl: 'assets/sample.jpg',
         title: '사과',
         content: '맛있는 사과입니다.',
@@ -31,6 +34,7 @@ class Product {
         reviewIdList: [],
       ),
       Product(
+        id: 2,
         imageUrl: 'assets/sample.jpg',
         title: '바나나',
         content: '맛있는 바나나입니다..',
@@ -40,6 +44,7 @@ class Product {
         reviewIdList: [],
       ),
       Product(
+        id: 3,
         imageUrl: 'assets/sample.jpg',
         title: '오렌지',
         content: '맛있는 오렌지입니다.',
