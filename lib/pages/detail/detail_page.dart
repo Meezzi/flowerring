@@ -1,3 +1,4 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
@@ -57,10 +58,14 @@ class _DetailPageState extends State<DetailPage> {
           IconButton(
             icon: const Icon(Icons.shopping_cart),
             onPressed: () {
+              Cart().addProduct(product, quantityController.quantity);
+
+              ///싱글톤 카드에 추가
+
               // 장바구니 이동
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => CartPage()),
+                MaterialPageRoute(builder: (_) => const CartPage()),
               );
             },
           ),
@@ -96,10 +101,14 @@ class _DetailPageState extends State<DetailPage> {
             IconButton(
               icon: const Icon(Icons.shopping_cart),
               onPressed: () {
+                Cart().addProduct(product, quantityController.quantity);
+
+                ///싱글톤 카드에 추가
+
                 // 장바구니 이동
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => CartPage()),
+                  MaterialPageRoute(builder: (_) => const CartPage()),
                 );
               },
             ),

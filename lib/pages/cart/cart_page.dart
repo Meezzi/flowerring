@@ -1,3 +1,4 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
@@ -17,6 +18,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
+    final cartItems = Cart().items; // 싱글톤 Cart에서 가져오기
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
