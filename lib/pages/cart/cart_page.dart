@@ -55,7 +55,10 @@ class _CartPageState extends State<CartPage> {
                 }
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: ItemInCart(item: cartItems[index]),
+                  child: ItemInCart(
+                    item: cartItems[index],
+                    onCartChanged: () => setState(() {}),
+                  ),
                 );
               },
             ),
