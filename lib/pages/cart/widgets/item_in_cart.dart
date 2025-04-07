@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class ItemInCart extends StatefulWidget {
   final CartItem item;
+  final VoidCallback onCartChanged;
 
-  const ItemInCart({super.key, required this.item});
+  const ItemInCart({
+    super.key,
+    required this.item,
+    required this.onCartChanged,
+  });
 
   @override
   State<ItemInCart> createState() => _ItemInCartState();
