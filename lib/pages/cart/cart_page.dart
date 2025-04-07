@@ -39,13 +39,9 @@ class _CartPageState extends State<CartPage> {
                   // item이 모두 표시되면 마지막으로 결제 정보 표시
                   return Column(
                     children: [
-                      const Divider(height: 32),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: PaymentSummary(
-                          productPrice: productPrice,
-                          deliveryFee: deliveryFee,
-                        ),
+                      PaymentSummary(
+                        productPrice: productPrice,
+                        deliveryFee: deliveryFee,
                       ),
                     ],
                   );
@@ -62,7 +58,6 @@ class _CartPageState extends State<CartPage> {
             padding: const EdgeInsets.all(12.0),
             child: SizedBox(
               width: double.infinity,
-              height: 48,
               child: _payButton(),
             ),
           ),

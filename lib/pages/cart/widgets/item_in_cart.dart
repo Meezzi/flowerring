@@ -29,6 +29,8 @@ class ItemInCart extends StatelessWidget {
             ),
           ],
         ),
+        SizedBox(height: 8),
+        Divider(),
       ],
     );
   }
