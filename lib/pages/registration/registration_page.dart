@@ -91,6 +91,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       reviewsCount: 0,
                       reviewIdList: [],
                     );
+                    // 상품등록 코드 진행
                     print(product);
                     Navigator.pop(context);
                     Navigator.pop(context);
