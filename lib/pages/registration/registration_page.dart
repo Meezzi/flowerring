@@ -1,3 +1,4 @@
+import 'package:flowerring/pages/registration/widgets/product_textfield.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPage extends StatelessWidget {
@@ -12,6 +13,7 @@ class RegistrationPage extends StatelessWidget {
           icon: Icon(Icons.arrow_back),
         ),
         title: Text('상품등록'),
+        centerTitle: true,
       ),
       body: SafeArea(
         child: Column(
@@ -49,13 +51,13 @@ class RegistrationPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            inputTextField('상품명', '상품명을 입력해 주세요.'),
+                            ProductTextfield('상품명', '상품명을 입력해 주세요.'),
                             SizedBox(height: 12),
-                            inputTextField('상품가격', '상품가격을 입력해 주세요.'),
+                            ProductTextfield('상품가격', '상품가격을 입력해 주세요.'),
                             SizedBox(height: 12),
-                            inputTextField('상품재고', '상품재고를 입력해 주세요.'),
+                            ProductTextfield('상품재고', '상품재고를 입력해 주세요.'),
                             SizedBox(height: 12),
-                            inputTextField('상품설명', '상품설명을 입력해 주세요.'),
+                            ProductTextfield('상품설명', '상품설명을 입력해 주세요.'),
                             SizedBox(height: 12),
                           ],
                         ),
@@ -94,21 +96,4 @@ class RegistrationPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget inputTextField(String label, String hintText) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(label, style: TextStyle(color: Colors.black)),
-      SizedBox(height: 4),
-      TextField(
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
-        decoration: InputDecoration(
-          border: OutlineInputBorder(),
-          hintText: hintText,
-        ),
-      ),
-    ],
-  );
 }
