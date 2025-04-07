@@ -1,7 +1,28 @@
-import 'package:flowerring/pages/registration/widgets/product_textfield.dart';
+import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationPage extends StatelessWidget {
+class RegistrationPage extends StatefulWidget {
+  @override
+  State<RegistrationPage> createState() => _RegistrationPageState();
+}
+
+class _RegistrationPageState extends State<RegistrationPage> {
+  final _nameController = TextEditingController();
+  final _stockController = TextEditingController();
+  final _descriptionController = TextEditingController();
+  final _priceController = TextEditingController();
+
+  @override
+  void dispose() {
+    // 메모리 정리
+    _nameController.dispose();
+    _stockController.dispose();
+    _descriptionController.dispose();
+    _priceController.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,13 +72,33 @@ class RegistrationPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ProductTextfield('상품명', '상품명을 입력해 주세요.'),
+                            ProductTextField(
+                              label: '상품명',
+                              hintText: '상품명을 입력해 주세요',
+                              controller: _nameController,
+                            ),
                             SizedBox(height: 12),
-                            ProductTextfield('상품가격', '상품가격을 입력해 주세요.'),
+                            ProductTextField(
+                              label: '상품가격',
+                              hintText: '상품가격을 입력해 주세요.',
+                              controller: _nameController,
+                              keyboardType: TextInputType.number,
+                            ),
                             SizedBox(height: 12),
-                            ProductTextfield('상품재고', '상품재고를 입력해 주세요.'),
+                            ProductTextField(
+                              label: '상품재고',
+                              hintText: '상품재고를 입력해 주세요.',
+                              controller: _nameController,
+                              keyboardType: TextInputType.number,
+                            ),
                             SizedBox(height: 12),
-                            ProductTextfield('상품설명', '상품설명을 입력해 주세요.'),
+                            ProductTextField(
+                              label: '상품설명',
+                              hintText: '상품설명을 입력해 주세요.',
+                              controller: _nameController,
+                              maxLines: 7,
+                              maxLength: 300,
+                            ),
                             SizedBox(height: 12),
                           ],
                         ),
