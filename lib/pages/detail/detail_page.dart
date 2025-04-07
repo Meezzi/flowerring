@@ -1,10 +1,39 @@
-import 'package:flowerring/pages/review/widgets/review_modal_widgets.dart';
+import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
+import 'package:flowerring/pages/detail/widgets/product_detail_page.dart';
 import 'package:flutter/material.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
+  final Product product;
+
+  const DetailPage({super.key, required this.product});
+  @override
+  State<DetailPage> createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  late QuantityController quantityController;
+
+  int selectedTabIndex = 0; // 0 = 상품설명, 1 = 리뷰
+
+  @override
+  void initState() {
+    super.initState();
+    quantityController = QuantityController(unitPrice: widget.product.price);
+    quantityController.addListener(() {
+      setState(() {}); // 수량 or 가격 변경 시 자동 UI 업데이트
+    });
+  }
+
+  @override
+  void dispose() {
+    quantityController.dispose(); // 메모리 누수 방지
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    int currentRating = 4; // 서버나 DB에서 가져온 상품 별점
+    final product = widget.product;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -18,8 +47,8 @@ class DetailPage extends StatelessWidget {
           },
         ),
 
-        title: const Text(
-          '아이폰 15Pro 급처합니다',
+        title: Text(
+          product.title,
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
@@ -32,140 +61,51 @@ class DetailPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
+      body: Column(
+        children: [
+          DetailImageSection(imageUrl: product.imageUrl),
+
+          ///상세페이지 이미지
+          DetailInfoSection(product: product, controller: quantityController),
+
+          ///상세페이지 정보
+          const SizedBox(height: 20),
+          DetailTabSelector(
+            ///상세페이지 상품설명,리뷰 선택
+            selectedTab: selectedTabIndex,
+            onTabChanged: (index) => setState(() => selectedTabIndex = index),
+          ),
+
+          DetailContentView(tabIndex: selectedTabIndex, product: product),
+
+          ///상세페이지 상품 설명 리뷰 설명
+        ],
+      ),
+
+      ///하단 장바구니 + 결제 버튼
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Row(
           children: [
-            ///이미지 불러오는 변수 임의 설정(변동가능)
-            GestureDetector(
-              onTap: () {},
-              child: Image.asset(
-                'assets/images/iphone.png',
-                height: 250,
-                fit: BoxFit.cover,
-              ),
-            ),
-
-            /// 제목 , 별점 ,가격 + 수량
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  ///제목
-                  Text(
-                    '아이폰 15Pro 급처합니다.',
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-
-                  ///별점
-                  Row(children: [buildStarRating(currentRating, (_) {})]),
-
-                  const SizedBox(height: 8),
-
-                  ///가격 + 수량 조절
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        '153,300원',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {},
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () {},
-                            ),
-                            const Text('1'),
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () {},
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 40),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              '상품설명',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Text(
-                              '리뷰',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const Divider(),
-                ],
-              ),
-            ),
-
-            ///상품설명
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  SizedBox(height: 8),
-                  Text('사용감 얼마 없는 아이폰 15 PRO'),
-                ],
-              ),
-            ),
-            const Spacer(),
-            const Divider(),
-
-            ///하단 장바구니 + 결제 버튼
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_cart),
-                    onPressed: () {},
-                  ),
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
-                      ),
-                      onPressed: () {},
-                      child: const Text(
-                        '결제하기',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+            IconButton(icon: const Icon(Icons.shopping_cart), onPressed: () {}),
+            Expanded(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {
+                  showPaymentConfirmationDialog(
+                    context,
+                    product,
+                    quantityController,
+                  );
+                },
+                child: const Text(
+                  '결제하기',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],
