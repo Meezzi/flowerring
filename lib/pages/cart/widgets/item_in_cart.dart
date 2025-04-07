@@ -22,7 +22,7 @@ class ItemInCart extends StatelessWidget {
               children: [
                 _itemTitle(item.product.title),
                 SizedBox(height: 20),
-                _itemPrice(),
+                _itemPrice(item.product.price),
               ],
             ),
 
@@ -57,8 +57,8 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
-  Widget _itemPrice() {
-    return Text('153,300원');
+  Widget _itemPrice(int price) {
+    return Text('$price원');
   }
 
   Widget _itemCounter() {
