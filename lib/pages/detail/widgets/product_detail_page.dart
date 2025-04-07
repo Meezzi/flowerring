@@ -1,6 +1,7 @@
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 ///상세페이지 이미지 클래스
 class DetailImageSection extends StatelessWidget {
@@ -170,7 +171,7 @@ class DetailContentView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
                   const SizedBox(height: 8),
-                  Text('테스트설명'),
+                  Text(product.content),
 
                   ///Text(product.description), 실제 상품 설명 나중에 설정
                   const SizedBox(height: 8),
