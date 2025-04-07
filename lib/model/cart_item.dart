@@ -8,6 +8,18 @@ class CartItem {
 }
 
 class Cart {
+  ///내부에서 자기 자신 인스턴스를 저장
+  static final Cart _instance = Cart._internal();
+
+  ///외부에서 호출할 때는 이걸로만 생성됨
+  factory Cart() {
+    return _instance;
+  }
+
+  ///진짜 생성자는 private
+  Cart._internal();
+
+  ///내부 상태관리
   final List<CartItem> _itemsInCart = [];
 
   List<CartItem> get items => _itemsInCart;

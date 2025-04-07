@@ -1,6 +1,7 @@
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 ///상세페이지 이미지 클래스
 class DetailImageSection extends StatelessWidget {
@@ -27,6 +28,11 @@ class DetailInfoSection extends StatelessWidget {
     super.key,
   });
 
+  String formatPrice(int price) {
+    final formatter = NumberFormat('#,###');
+    return formatter.format(price);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -45,7 +51,7 @@ class DetailInfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${controller.totalPrice}원',
+                '${formatPrice(controller.totalPrice)}원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Row(
@@ -170,7 +176,7 @@ class DetailContentView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 children: [
                   const SizedBox(height: 8),
-                  Text('테스트설명'),
+                  Text(product.content),
 
                   ///Text(product.description), 실제 상품 설명 나중에 설정
                   const SizedBox(height: 8),
