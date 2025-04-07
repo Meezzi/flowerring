@@ -4,7 +4,7 @@ import './review_page.dart';
 void showReviewModal(
   BuildContext context,
   VoidCallback onClose,
-  ValueChanged<int> onSubmit,
+  Function(int, String) onSubmit, // 별점과 리뷰 내용을 함께 전달
 ) {
   showDialog(
     context: context,

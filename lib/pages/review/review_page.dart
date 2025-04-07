@@ -3,10 +3,10 @@ import './widgets/review_modal_widgets.dart';
 
 class ReviewModal extends StatefulWidget {
   final VoidCallback onClose;
-  final ValueChanged<int> onSubmit;
+  final Function(int, String) onSubmit; // 별점과 리뷰 내용을 함께 전달
 
   const ReviewModal({Key? key, required this.onClose, required this.onSubmit})
-    : super(key: key);
+      : super(key: key);
 
   @override
   State<ReviewModal> createState() => _ReviewModalState();
@@ -17,9 +17,14 @@ class _ReviewModalState extends State<ReviewModal> {
   final TextEditingController _reviewController = TextEditingController();
 
   @override
+  void dispose() {
+    _reviewController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Dialog(
-      // 모달 창 부모 위젯 구성
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: SizedBox(
         width: 560,
@@ -38,7 +43,23 @@ class _ReviewModalState extends State<ReviewModal> {
               const SizedBox(height: 16),
               buildReviewTextField(_reviewController),
               const SizedBox(height: 16),
-              buildSubmitButton(onPressed: () {}),
+              buildSubmitButton(
+                onPressed: () {
+                  if (_rating > 0 && _reviewController.text.isNotEmpty) {
+                    // 별점과 리뷰 내용을 상위 위젯으로 전달
+                    widget.onSubmit(_rating, _reviewController.text);
+                    widget.onClose(); // 모달 닫기
+                  } else {
+                    // 입력이 유효하지 않을 경우 경고 표시 (옵션)
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("별점과 리뷰 내용을 입력해주세요."),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),
