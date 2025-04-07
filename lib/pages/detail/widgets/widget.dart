@@ -10,11 +10,9 @@ class QuantityController extends ChangeNotifier {
   QuantityController({required this.unitPrice});
 
   ///수량에 따라 자동으로 계산된 가격
-
   int get quantity => _quantity;
 
   ///수량과 총 가격 동시에 반영
-
   int get totalPrice => _quantity * unitPrice;
 
   void increment() {
@@ -51,8 +49,6 @@ void showPaymentConfirmationDialog(
             child: Text('취소'),
             onPressed: () {
               Navigator.of(context).pop();
-
-              ///첫번째 팝업 닫기
             },
           ),
           CupertinoDialogAction(
