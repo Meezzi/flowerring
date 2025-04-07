@@ -1,11 +1,16 @@
 import 'package:flowerring/model/cart_item.dart';
 import 'package:flutter/material.dart';
 
-class ItemInCart extends StatelessWidget {
+class ItemInCart extends StatefulWidget {
   final CartItem item;
 
   const ItemInCart({super.key, required this.item});
 
+  @override
+  State<ItemInCart> createState() => _ItemInCartState();
+}
+
+class _ItemInCartState extends State<ItemInCart> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,16 +27,16 @@ class ItemInCart extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  _itemTitle(item.product.title),
+                  _itemTitle(widget.item.product.title),
                   SizedBox(height: 20),
-                  _itemPrice(item.product.price * item.quantity),
+                  _itemPrice(widget.item.product.price * widget.item.quantity),
                 ],
               ),
             ),
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [SizedBox(height: 40), _itemCounter(item.quantity)],
+              children: [SizedBox(height: 40), _itemCounter(widget.item.quantity)],
             ),
           ],
         ),
