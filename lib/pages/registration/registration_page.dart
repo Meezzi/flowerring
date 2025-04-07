@@ -1,3 +1,4 @@
+import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
     _priceController.dispose();
 
     super.dispose();
+  }
+
+  void _submitForm() {
+    final name = _nameController.text;
+    final stock = _stockController.text;
+    final description = _descriptionController.text;
+    final price = _priceController.text;
+
+    print('상품명: $name');
+    print('재고: $stock');
+    print('설명: $description');
+    print('가격: $price');
   }
 
   @override
@@ -114,7 +127,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
               height: 48,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _submitForm();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ListPage();
+                      },
+                    ),
+                  );
+                },
                 style: ButtonStyle(
                   shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(

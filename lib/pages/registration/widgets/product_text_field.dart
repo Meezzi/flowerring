@@ -5,6 +5,7 @@ class ProductTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType keyboardType;
+  final String? Function(String?)? validator;
   final int maxLines;
   final int maxLength;
 
@@ -13,6 +14,7 @@ class ProductTextField extends StatelessWidget {
     required this.label,
     required this.hintText,
     required this.controller,
+    this.validator,
     this.keyboardType = TextInputType.text,
     this.maxLines = 1,
     this.maxLength = 15,
@@ -25,7 +27,7 @@ class ProductTextField extends StatelessWidget {
       children: [
         Text(label, style: TextStyle(color: Colors.black)),
         SizedBox(height: 4),
-        TextField(
+        TextFormField(
           controller: controller,
           keyboardType: keyboardType,
           maxLines: maxLines,
@@ -34,6 +36,7 @@ class ProductTextField extends StatelessWidget {
             border: OutlineInputBorder(),
             hintText: hintText,
           ),
+          validator: validator,
         ),
       ],
     );
