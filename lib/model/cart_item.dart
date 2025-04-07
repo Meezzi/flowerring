@@ -10,6 +10,8 @@ class CartItem {
 class Cart {
   final List<CartItem> _itemsInCart = [];
 
+  List<CartItem> get items => _itemsInCart;
+
   void addProduct(Product product, int quantity) {
     _itemsInCart.add(CartItem(product: product, quantity: quantity));
   }
