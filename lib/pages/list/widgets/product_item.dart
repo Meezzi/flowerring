@@ -29,7 +29,7 @@ class ProductItem extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
                   product.title,
@@ -38,8 +38,11 @@ class ProductItem extends StatelessWidget {
                 Row(
                   children: [
                     Icon(Icons.star, color: Colors.yellow),
-                    Text('${product.rate}'),
-                    const SizedBox(height: 50, width: 150),
+                    Text(
+                      '${product.rate}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(width: 150),
                     Text(
                       '${product.price}원',
                       style: TextStyle(
