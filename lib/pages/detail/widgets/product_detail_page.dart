@@ -82,29 +82,68 @@ class DetailTabSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: [
-        GestureDetector(
-          onTap: () => onTabChanged(0),
-          child: Text(
-            '상품설명',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: selectedTab == 0 ? Colors.black : Colors.grey,
+        // 탭 선택 영역
+        Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onTabChanged(0),
+                child: Column(
+                  children: [
+                    Text(
+                      '상품설명',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: selectedTab == 0 ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onTabChanged(1),
+                child: Column(
+                  children: [
+                    Text(
+                      '리뷰',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: selectedTab == 1 ? Colors.black : Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        const SizedBox(width: 130),
-        GestureDetector(
-          onTap: () => onTabChanged(1),
-          child: Text(
-            '리뷰',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: selectedTab == 1 ? Colors.black : Colors.grey,
+        // 전체 라인 + 하이라인
+        Stack(
+          children: [
+            Container(
+              height: 2,
+              width: double.infinity,
+              color: Colors.grey.shade300,
             ),
-          ),
+            Align(
+              alignment:
+                  selectedTab == 0
+                      ? Alignment.centerLeft
+                      : Alignment.centerRight,
+              child: FractionallySizedBox(
+                widthFactor: 0.5,
+                child: Container(height: 2, color: Colors.black),
+              ),
+            ),
+          ],
         ),
       ],
     );

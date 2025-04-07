@@ -75,7 +75,7 @@ class _DetailPageState extends State<DetailPage> {
             selectedTab: selectedTabIndex,
             onTabChanged: (index) => setState(() => selectedTabIndex = index),
           ),
-          const Divider(),
+
           DetailContentView(tabIndex: selectedTabIndex, product: product),
 
           ///상세페이지 상품 설명 리뷰 설명
