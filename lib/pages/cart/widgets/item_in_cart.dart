@@ -41,15 +41,19 @@ class _ItemInCartState extends State<ItemInCart> {
   }
 
   void _changeQuantity(bool increment) {
-    setState(() {
-      if (increment) {
-        widget.item.quantity++;
-      } else {
-        if (widget.item.quantity > 1) {
-          widget.item.quantity--;
-        }
+    if (increment) {
+      bool success = Cart().addProduct(widget.item.product, 1);
+
+      if (!success) {
+        _showStockExceededDialog();
+        return;
       }
-    });
+    } else {
+      if (widget.item.quantity > 1) {
+        widget.item.quantity--;
+      }
+    }
+
     widget.onCartChanged();
   }
 
