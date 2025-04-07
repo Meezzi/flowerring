@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProductTextfield extends StatefulWidget {
-  ProductTextfield(this.label, this.hintText);
+  ProductTextfield(this.label, this.hintText, {super.key});
   final String label;
   final String hintText;
   @override

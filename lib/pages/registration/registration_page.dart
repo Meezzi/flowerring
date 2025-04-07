@@ -73,6 +73,7 @@ class RegistrationPage extends StatelessWidget {
               height: 48,
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: ElevatedButton(
+                onPressed: () {},
                 style: ButtonStyle(
                   shape: WidgetStatePropertyAll(
                     RoundedRectangleBorder(
@@ -87,7 +88,6 @@ class RegistrationPage extends StatelessWidget {
                     TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
-                onPressed: () {},
                 child: Text('등록하기'),
               ),
             ),
