@@ -27,6 +27,9 @@ class _CartPageState extends State<CartPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
+        backgroundColor: Colors.white,
+        // 스크롤해도 색상이 달라지지 않도록 설정
+        scrolledUnderElevation: 0
       ),
       body: Column(
         children: [
