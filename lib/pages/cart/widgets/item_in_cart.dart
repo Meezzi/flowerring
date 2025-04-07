@@ -1,4 +1,5 @@
 import 'package:flowerring/model/cart_item.dart';
+import 'package:flowerring/utils/format_price.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -123,7 +124,7 @@ class _ItemInCartState extends State<ItemInCart> {
   }
 
   Widget _itemPrice(int price) {
-    return Text('$price원');
+    return Text('${formatPrice(price)}원');
   }
 
   Widget _itemCounter(int quantity) {
