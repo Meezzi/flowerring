@@ -56,6 +56,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
               actions: [
                 TextButton(
                   onPressed: () {
+                    final name = _nameController.text;
+                    final stock = _stockController.text;
+                    final description = _descriptionController.text;
+                    final price = _priceController.text;
+                    print('상품명: $name');
+                    print('재고: $stock');
+                    print('설명: $description');
+                    print('가격: $price');
                     Navigator.pop(context);
                   },
                   child: Text('확인'),
@@ -64,15 +72,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ),
       );
     }
-    // final name = _nameController.text;
-    // final stock = _stockController.text;
-    // final description = _descriptionController.text;
-    // final price = _priceController.text;
-
-    // print('상품명: $name');
-    // print('재고: $stock');
-    // print('설명: $description');
-    // print('가격: $price');
   }
 
   @override
