@@ -173,7 +173,10 @@ class DetailContentView extends StatelessWidget {
       child:
           tabIndex == 0
               ? ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 22,
+                ),
                 children: [
                   const SizedBox(height: 8),
                   Text(product.content),
@@ -183,7 +186,10 @@ class DetailContentView extends StatelessWidget {
                 ],
               )
               : ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 22,
+                ),
                 children: const [
                   SizedBox(height: 8),
                   Text('⭐️ 4.8 | 총 20개의 리뷰가 있습니다'),
