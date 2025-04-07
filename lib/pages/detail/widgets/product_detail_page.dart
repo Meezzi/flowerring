@@ -28,6 +28,11 @@ class DetailInfoSection extends StatelessWidget {
     super.key,
   });
 
+  String formatPrice(int price) {
+    final formatter = NumberFormat('#,###');
+    return formatter.format(price);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,7 +51,7 @@ class DetailInfoSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${controller.totalPrice}원',
+                '${formatPrice(controller.totalPrice)}원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Row(
