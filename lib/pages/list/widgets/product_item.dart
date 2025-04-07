@@ -29,7 +29,15 @@ class ProductItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text(product.title)],
+              children: [
+                Text(product.title),
+                Row(
+                  children: [
+                    Icon(Icons.star, color: Colors.yellow),
+                    Text('${product.rate}'),
+                  ],
+                ),
+              ],
             ),
           ),
         ],
