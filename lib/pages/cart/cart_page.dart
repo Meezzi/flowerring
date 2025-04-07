@@ -1,5 +1,4 @@
 import 'package:flowerring/model/cart_item.dart';
-import 'package:flowerring/model/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
