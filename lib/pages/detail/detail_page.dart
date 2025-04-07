@@ -92,6 +92,7 @@ class _DetailPageState extends State<DetailPage> {
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
+                  foregroundColor: Colors.white,
                 ),
                 onPressed: () {
                   showPaymentConfirmationDialog(
@@ -102,10 +103,7 @@ class _DetailPageState extends State<DetailPage> {
                 },
                 child: const Text(
                   '결제하기',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
             ),
