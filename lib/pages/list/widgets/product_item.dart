@@ -14,18 +14,23 @@ class ProductItem extends StatelessWidget {
       height: 80,
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(15),
         border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
       ),
       child: Row(
         children: [
           ClipRect(
             child: AspectRatio(
-              aspectRatio: 1, // 1:1 비율로 설정
+              aspectRatio: 1,
               child: Image.network(product.imageUrl, fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+            ),
+          ),
         ],
       ),
     );
