@@ -35,9 +35,11 @@ class ProductItem extends StatelessWidget {
                   children: [
                     Icon(Icons.star, color: Colors.yellow),
                     Text('${product.rate}'),
+                    const SizedBox(height: 45),
+                    const SizedBox(width: 150),
+                    Text('${product.price}원'),
                   ],
                 ),
-                Text('${product.price}'),
               ],
             ),
           ),
