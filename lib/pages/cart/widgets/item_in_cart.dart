@@ -47,14 +47,20 @@ class _ItemInCartState extends State<ItemInCart> {
                 children: [
                   _itemTitle(widget.item.product.title),
                   SizedBox(height: 20),
-                  _itemPrice(widget.item.product.price * widget.item.quantity),
+                  _itemPrice(
+                    widget.item.product.price *
+                        widget.item.quantity,
+                  ),
                 ],
               ),
             ),
 
             Column(
               crossAxisAlignment: CrossAxisAlignment.end,
-              children: [SizedBox(height: 40), _itemCounter(widget.item.quantity)],
+              children: [
+                SizedBox(height: 40),
+                _itemCounter(widget.item.quantity),
+              ],
             ),
           ],
         ),
@@ -91,21 +97,24 @@ class _ItemInCartState extends State<ItemInCart> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        _quantityStepButton(Icons.remove),
-        _countValueBox(quantity),
-        _quantityStepButton(Icons.add),
+        _quantityStepButton(Icons.remove, false),
+        _countValueBox(widget.item.quantity),
+        _quantityStepButton(Icons.add, true),
       ],
     );
   }
 
-  Widget _quantityStepButton(IconData icon) {
+  Widget _quantityStepButton(IconData icon, bool increment) {
     return Container(
       width: 36,
       height: 36,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300]!),
       ),
-      child: IconButton(icon: Icon(icon, size: 16), onPressed: () {}),
+      child: IconButton(
+        icon: Icon(icon, size: 16),
+        onPressed: () => _changeQuantity(increment),
+      ),
     );
   }
 
@@ -141,7 +150,10 @@ class _ItemInCartState extends State<ItemInCart> {
           bottom: BorderSide(color: Colors.grey[300]!),
         ),
       ),
-      child: Text('$quantity', style: const TextStyle(fontSize: 14)),
+      child: Text(
+        '$quantity',
+        style: const TextStyle(fontSize: 14),
+      ),
     );
   }
 
