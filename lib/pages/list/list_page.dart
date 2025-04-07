@@ -1,6 +1,7 @@
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/detail/detail_page.dart';
 import 'package:flowerring/pages/list/widgets/product_item.dart';
+import 'package:flowerring/pages/registration/registration_page.dart';
 import 'package:flutter/material.dart';
 
 class ListPage extends StatelessWidget {
@@ -11,6 +12,19 @@ class ListPage extends StatelessWidget {
     // Product.getProducts()로 상품 데이터 가져오기
     final List<Product> items = Product.getProducts();
     return Scaffold(
+      // 상품 등록 버튼 클릭 시 등록 페이지 이동
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return RegistrationPage();
+              },
+            ),
+          );
+        },
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text('플라워링'),
