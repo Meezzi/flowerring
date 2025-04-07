@@ -1,4 +1,5 @@
 import 'package:flowerring/model/product.dart';
+import 'package:collection/collection.dart';
 
 class CartItem {
   final Product product;
@@ -24,8 +25,29 @@ class Cart {
 
   List<CartItem> get items => _itemsInCart;
 
-  void addProduct(Product product, int quantity) {
-    _itemsInCart.add(CartItem(product: product, quantity: quantity));
+  bool addProduct(Product product, int quantity) {
+    final existingItem = _itemsInCart.firstWhereOrNull(
+      (item) => item.product.id == product.id,
+    );
+
+    // 현재 장바구니에 담긴 상품의 수량
+    int currentQuantityInCart = existingItem?.quantity ?? 0;
+
+    // 추가 후 예상 수량
+    int totalQuantityAfterAdd = currentQuantityInCart + quantity;
+
+    // 재고보다 장바구니에 담긴 상품이 많다면 추가 X
+    if (totalQuantityAfterAdd > product.stock) return false;
+
+    // 이미 존재하는 상품이면 수량만 증가
+    if (existingItem != null) {
+      existingItem.quantity += quantity;
+    } else {
+      // 장바구니에 없는 상품이면 새로 추가
+      _itemsInCart.add(CartItem(product: product, quantity: quantity));
+    }
+
+    return true;
   }
 
   void removeProduct(CartItem product) {
@@ -35,7 +57,7 @@ class Cart {
   int getTotalPrice() {
     int totalPrice = 0;
 
-    for(final item in items) {
+    for (final item in items) {
       totalPrice += item.product.price * item.quantity;
     }
     return totalPrice;

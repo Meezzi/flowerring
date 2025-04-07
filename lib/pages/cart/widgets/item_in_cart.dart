@@ -1,4 +1,6 @@
 import 'package:flowerring/model/cart_item.dart';
+import 'package:flowerring/utils/format_price.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemInCart extends StatefulWidget {
@@ -16,16 +18,43 @@ class ItemInCart extends StatefulWidget {
 }
 
 class _ItemInCartState extends State<ItemInCart> {
+  void _showStockExceededDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('재고 초과'),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text('재고보다 많은 수량은 담을 수 없습니다.'),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('확인'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _changeQuantity(bool increment) {
-    setState(() {
-      if (increment) {
-        widget.item.quantity++;
-      } else {
-        if (widget.item.quantity > 1) {
-          widget.item.quantity--;
-        }
+    if (increment) {
+      bool success = Cart().addProduct(widget.item.product, 1);
+
+      if (!success) {
+        _showStockExceededDialog();
+        return;
       }
-    });
+    } else {
+      if (widget.item.quantity > 1) {
+        widget.item.quantity--;
+      }
+    }
+
     widget.onCartChanged();
   }
 
@@ -95,7 +124,7 @@ class _ItemInCartState extends State<ItemInCart> {
   }
 
   Widget _itemPrice(int price) {
-    return Text('$price원');
+    return Text('${formatPrice(price)}원');
   }
 
   Widget _itemCounter(int quantity) {
