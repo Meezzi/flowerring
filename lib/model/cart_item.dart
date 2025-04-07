@@ -6,3 +6,11 @@ class CartItem {
 
   CartItem({required this.product, required this.quantity});
 }
+
+class Cart {
+  final List<CartItem> _itemsInCart = [];
+
+  void addProduct(Product product, int quantity) {
+    _itemsInCart.add(CartItem(product: product, quantity: quantity));
+  }
+}
