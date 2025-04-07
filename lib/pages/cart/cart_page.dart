@@ -4,10 +4,7 @@ import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
 
 class CartPage extends StatefulWidget {
-  ///장바구니 아이템 추가
-  final List<Product> cartItems;
-
-  const CartPage({super.key, required this.cartItems});
+  const CartPage({super.key});
 
   @override
   State<CartPage> createState() => _CartPageState();
