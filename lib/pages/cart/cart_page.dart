@@ -73,6 +73,19 @@ class _CartPageState extends State<CartPage> {
               width: double.infinity,
               child: _payButton(),
             ),
+    );
+  }
+
+  Widget _emptyCartMessage() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.shopping_cart_outlined, size: 80, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            '상품이 없습니다.',
+            style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
         ],
       ),
