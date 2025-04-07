@@ -28,6 +28,10 @@ class Cart {
     _itemsInCart.add(CartItem(product: product, quantity: quantity));
   }
 
+  void removeProduct(CartItem product) {
+    _itemsInCart.remove(product);
+  }
+
   int getTotalPrice() {
     int totalPrice = 0;
 
