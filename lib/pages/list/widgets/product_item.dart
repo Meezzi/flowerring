@@ -14,6 +14,7 @@ class ProductItem extends StatelessWidget {
       height: 80,
       decoration: BoxDecoration(
         color: Colors.transparent,
+        borderRadius: BorderRadius.circular(15),
         border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
       ),
       child: Row(
