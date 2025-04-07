@@ -1,6 +1,8 @@
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
 import 'package:flutter/material.dart';
+import '../../review/widgets/review_detail_page.dart';
+
 
 ///상세페이지 이미지 클래스
 class DetailImageSection extends StatelessWidget {
@@ -176,19 +178,24 @@ class DetailContentView extends StatelessWidget {
                   const SizedBox(height: 8),
                 ],
               )
-              : ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                children: const [
-                  SizedBox(height: 8),
-                  Text('⭐️ 4.8 | 총 20개의 리뷰가 있습니다'),
-                  SizedBox(height: 8),
-                  Text('“진짜 거의 새제품이었어요! 대박 만족 ”'),
-                  SizedBox(height: 8),
-                  Text('“배송도 빠르고 제품 상태 완전 좋아요.”'),
-                  SizedBox(height: 8),
-                  Text('“감사합니다! 다음에도 구매할게요.”'),
-                ],
-              ),
+              : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        headerTitle(),
+                        writeButton(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    reviewStatus()
+                  ],
+                ),
+              )
     );
   }
 }
