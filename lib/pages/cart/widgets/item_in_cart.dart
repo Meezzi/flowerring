@@ -164,7 +164,7 @@ class _ItemInCartState extends State<ItemInCart> {
 
   Widget _closeButton() {
     return GestureDetector(
-      onTap: () {},
+      onTap: _removeProduct,
       child: Icon(Icons.close, size: 20),
     );
   }
