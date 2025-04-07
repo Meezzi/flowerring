@@ -57,15 +57,8 @@ void showPaymentConfirmationDialog(
             child: Text('확인'),
             onPressed: () {
               Navigator.of(context).pop(); // 첫 번째 팝업
-              ///싱글톤 카트에 추가
-              Cart().addProduct(product, quantityController.quantity);
 
-              // 장바구니 이동
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const CartPage()),
-              );
-              /*showCupertinoDialog(
+              showCupertinoDialog(
                 context: context,
                 builder: (context) {
                   return CupertinoAlertDialog(
@@ -81,7 +74,7 @@ void showPaymentConfirmationDialog(
                     ],
                   );
                 },
-              );*/
+              );
             },
           ),
         ],
