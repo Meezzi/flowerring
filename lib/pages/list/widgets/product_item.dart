@@ -21,7 +21,7 @@ class ProductItem extends StatelessWidget {
         children: [
           ClipRect(
             child: AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: 1, // 1:1 비율로 설정
               child: Image.network(product.imageUrl, fit: BoxFit.cover),
             ),
           ),
