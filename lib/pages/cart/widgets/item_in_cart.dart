@@ -20,7 +20,7 @@ class ItemInCart extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _itemTitle(),
+                _itemTitle(item.product.title),
                 SizedBox(height: 20),
                 _itemPrice(),
               ],
@@ -50,9 +50,9 @@ class ItemInCart extends StatelessWidget {
     );
   }
 
-  Widget _itemTitle() {
+  Widget _itemTitle(String title) {
     return Text(
-      '아이폰 15PRO 금처합니다.',
+      title,
       style: TextStyle(fontWeight: FontWeight.bold),
     );
   }
