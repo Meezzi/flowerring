@@ -1,7 +1,10 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flutter/material.dart';
 
 class ItemInCart extends StatelessWidget {
-  const ItemInCart({super.key});
+  final CartItem item;
+
+  const ItemInCart({super.key, required this.item});
 
   @override
   Widget build(BuildContext context) {
