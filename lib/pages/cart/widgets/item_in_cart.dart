@@ -1,4 +1,5 @@
 import 'package:flowerring/model/cart_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ItemInCart extends StatefulWidget {
@@ -16,6 +17,29 @@ class ItemInCart extends StatefulWidget {
 }
 
 class _ItemInCartState extends State<ItemInCart> {
+  void _showStockExceededDialog() {
+    showCupertinoDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return CupertinoAlertDialog(
+          title: Text('재고 초과'),
+          content: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: Text('재고보다 많은 수량은 담을 수 없습니다.'),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('확인'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _changeQuantity(bool increment) {
     setState(() {
       if (increment) {
