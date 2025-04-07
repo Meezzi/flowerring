@@ -9,19 +9,20 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       width: double.infinity,
-      height: 80,
+      height: 100,
       decoration: BoxDecoration(
         color: Colors.transparent,
         border: Border(bottom: BorderSide(color: Colors.grey[300]!)),
       ),
       child: Row(
         children: [
-          ClipRect(
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
             child: AspectRatio(
               aspectRatio: 1,
-              child: Image.network(product.imageUrl, fit: BoxFit.cover),
+              child: Image.asset(product.imageUrl, fit: BoxFit.cover),
             ),
           ),
           const SizedBox(width: 10),
@@ -30,14 +31,22 @@ class ProductItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(product.title),
+                Text(
+                  product.title,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 Row(
                   children: [
                     Icon(Icons.star, color: Colors.yellow),
                     Text('${product.rate}'),
-                    const SizedBox(height: 45),
-                    const SizedBox(width: 150),
-                    Text('${product.price}원'),
+                    const SizedBox(height: 50, width: 150),
+                    Text(
+                      '${product.price}원',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ],
