@@ -12,13 +12,14 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  final int productPrice = 20600;
   final int deliveryFee = 0;
 
   @override
   Widget build(BuildContext context) {
     final cartItems = Cart().items; // 싱글톤 Cart에서 가져오기
     final itemCount = cartItems.length;
+    final int productPrice = Cart().getTotalPrice();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
