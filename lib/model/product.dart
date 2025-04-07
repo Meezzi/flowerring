@@ -1,5 +1,6 @@
 class Product {
   final int id;
+  final int stock;
   final String imageUrl;
   final String title;
   final String content;
@@ -11,6 +12,7 @@ class Product {
   // 생성자
   Product({
     required this.id,
+    required this.stock,
     required this.imageUrl,
     required this.title,
     required this.content,
@@ -25,6 +27,7 @@ class Product {
     return [
       Product(
         id: 1,
+        stock: 5,
         imageUrl: 'assets/sample.jpg',
         title: '사과',
         content: '맛있는 사과입니다.',
@@ -35,6 +38,7 @@ class Product {
       ),
       Product(
         id: 2,
+        stock: 5,
         imageUrl: 'assets/sample.jpg',
         title: '바나나',
         content: '맛있는 바나나입니다..',
@@ -45,6 +49,7 @@ class Product {
       ),
       Product(
         id: 3,
+        stock: 5,
         imageUrl: 'assets/sample.jpg',
         title: '오렌지',
         content: '맛있는 오렌지입니다.',
