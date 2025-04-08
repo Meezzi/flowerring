@@ -1,24 +1,17 @@
-import 'dart:math';
-
 import 'package:flowerring/model/product.dart';
-import 'package:flowerring/pages/list/list_page.dart';
-import 'package:flowerring/pages/registration/widgets/product_imgage_selector.dart';
+import 'package:flowerring/pages/registration/widgets/product_image_selector.dart';
 import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationPage extends StatefulWidget {
+  const RegistrationPage({super.key});
+
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
   // image 관련
-  final List<String> imagePaths = [
-    'assets/images/apple.jpg',
-    'assets/images/bag.png',
-    'assets/images/nike_phantom_gx.png',
-    'assets/images/sample.jpg',
-  ];
   String? _selectedImage;
   void onImageSelected(imagePath) {
     setState(() {
@@ -44,6 +37,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     super.dispose();
   }
 
+  // 상품 입력폼 넘겨주기
   void _submitForm() {
     if (_selectedImage == null) {
       // 사진을 선택하지 않았으면
@@ -94,7 +88,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     // 상품등록 코드 진행
 
                     Navigator.pop(context);
-                    Navigator.pop(context);
+                    Navigator.pop(context, product);
                   },
                   child: Text('확인'),
                 ),
@@ -144,7 +138,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      ProductImgageSelector(onImageSelected: onImageSelected),
+                      ProductImageSelector(onImageSelected: onImageSelected),
                       Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16,
@@ -239,6 +233,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return null;
   }
 
+  // 유효성 검사
   String? priceValidator(String? value) {
     if (value == null || value.isEmpty) {
       return '가격을 입력해 주세요';
