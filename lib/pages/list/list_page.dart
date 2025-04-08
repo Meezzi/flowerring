@@ -4,9 +4,14 @@ import 'package:flowerring/pages/list/widgets/product_item.dart';
 import 'package:flowerring/pages/registration/registration_page.dart';
 import 'package:flutter/material.dart';
 
-class ListPage extends StatelessWidget {
+class ListPage extends StatefulWidget {
   const ListPage({super.key});
 
+  @override
+  State<ListPage> createState() => _ListPageState();
+}
+
+class _ListPageState extends State<ListPage> {
   @override
   Widget build(BuildContext context) {
     // Product.getProducts()로 상품 데이터 가져오기
