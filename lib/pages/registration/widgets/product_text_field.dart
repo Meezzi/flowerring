@@ -27,7 +27,7 @@ class ProductTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(color: Colors.black)),
+        Text(label),
         SizedBox(height: 4),
         TextFormField(
           controller: controller,

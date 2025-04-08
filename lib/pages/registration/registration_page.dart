@@ -195,29 +195,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
             ),
             SizedBox(height: 8),
-            Container(
-              width: double.infinity,
-              height: 48,
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: ElevatedButton(
-                onPressed: () {
-                  _submitForm();
-                },
-                style: ButtonStyle(
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  backgroundColor: WidgetStatePropertyAll(
-                    Color.fromRGBO(255, 118, 118, 1),
-                  ),
-                  foregroundColor: WidgetStatePropertyAll(Colors.white),
-                  textStyle: WidgetStatePropertyAll(
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    _submitForm();
+                  },
+                  child: Text('등록하기'),
                 ),
-                child: Text('등록하기'),
               ),
             ),
           ],

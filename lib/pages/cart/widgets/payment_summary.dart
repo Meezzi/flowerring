@@ -1,6 +1,5 @@
 import 'package:flowerring/utils/format_price.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class PaymentSummary extends StatelessWidget {
   final int productPrice;
@@ -16,12 +15,11 @@ class PaymentSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     final total = productPrice + deliveryFee;
 
-    final labelStyle = TextStyle(fontSize: 16, color: Colors.grey[700]);
+    final labelStyle = TextStyle(fontSize: 16);
 
     final totalLabelStyle = TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: Colors.grey[900],
     );
 
     return Column(

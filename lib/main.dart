@@ -1,4 +1,5 @@
 import 'package:flowerring/pages/list/list_page.dart';
+import 'package:flowerring/theme/dark.dart';
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -12,6 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      darkTheme: darkTheme,
       home: ListPage(),
     );
   }
