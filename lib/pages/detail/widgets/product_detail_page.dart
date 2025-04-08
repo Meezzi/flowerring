@@ -217,7 +217,7 @@ class _DetailContentViewState extends State<DetailContentView> {
       int rating,
       String content,
     ) {
-      _addReview(rating, content); // 리뷰 추가 함수
+      _addReview(rating, content); // 리뷰 추가
     });
   }
 
