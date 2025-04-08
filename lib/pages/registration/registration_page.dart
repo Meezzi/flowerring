@@ -1,3 +1,4 @@
+import 'package:flowerring/common/widgets/common_button.dart';
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/registration/widgets/product_image_selector.dart';
 import 'package:flowerring/pages/registration/widgets/product_text_field.dart';
@@ -199,11 +200,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    _submitForm();
-                  },
-                  child: Text('등록하기'),
+                child: CommonButton(
+                  buttonTitle: '등록하기',
+                  onPressed: _submitForm,
                 ),
               ),
             ),
