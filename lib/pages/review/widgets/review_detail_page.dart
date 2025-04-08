@@ -4,8 +4,8 @@ import '../../../model/review.dart';
 
 //리뷰 탭 타이틀
 // ignore: camel_case_types
-class headerTitle extends StatelessWidget {
-  const headerTitle({super.key});
+class HeaderTitle extends StatelessWidget {
+  const HeaderTitle({super.key});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,17 +22,23 @@ class headerTitle extends StatelessWidget {
 }
 
 // 리뷰 탭 리뷰작성 버튼
-class writeButton extends StatelessWidget {
+class WriteButton extends StatelessWidget {
   final VoidCallback onTap;
 
-  const writeButton({Key? key, required this.onTap}) : super(key: key);
+  const WriteButton({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       child: ElevatedButton(
         onPressed: onTap,
-        child: Row(children: const [Icon(Icons.add), Text("리뷰 등록하기")]),
+        child: Row(
+          children: const [
+            Icon(Icons.add),
+            SizedBox(width: 4),
+            Text("리뷰 등록하기"),
+          ],
+        ),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromRGBO(255, 118, 118, 1),
           surfaceTintColor: const Color.fromRGBO(255, 118, 118, 1),
@@ -174,10 +180,10 @@ class ReviewStatus extends StatelessWidget {
 }
 
 // 리뷰 리스트 위젯
-class reviewList extends StatelessWidget {
+class ReviewList extends StatelessWidget {
   final List<Review> reviews;
 
-  const reviewList({super.key, required this.reviews});
+  const ReviewList({super.key, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
