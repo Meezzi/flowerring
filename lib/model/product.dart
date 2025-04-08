@@ -1,6 +1,6 @@
 class Product {
   final int id;
-  final int stock;
+  int stock;
   final String imageUrl;
   final String title;
   final String content;

@@ -1,10 +1,13 @@
 import 'package:flowerring/model/cart_item.dart';
+import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final Function onPayment;
+
+  CartPage({super.key, required this.onPayment});
 
   @override
   State<CartPage> createState() => _CartPageState();
@@ -101,7 +104,14 @@ class _CartPageState extends State<CartPage> {
 
   Widget _payButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        widget.onPayment(Cart().items);
+        Cart().clearProduct();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ListPage()),
+        );
+      },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
         backgroundColor: const Color.fromRGBO(255, 118, 118, 1.0),

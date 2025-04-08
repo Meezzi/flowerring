@@ -7,8 +7,13 @@ import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
   final Product product;
+  final Function onPayment;
 
-  const DetailPage({super.key, required this.product});
+  const DetailPage({
+    super.key,
+    required this.product,
+    required this.onPayment,
+  });
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -77,7 +82,9 @@ class _DetailPageState extends State<DetailPage> {
               // 장바구니 이동
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => const CartPage()),
+                MaterialPageRoute(
+                  builder: (_) => CartPage(onPayment: widget.onPayment),
+                ),
               );
             },
           ),
@@ -123,7 +130,10 @@ class _DetailPageState extends State<DetailPage> {
                     // 장바구니 이동
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const CartPage()),
+                      MaterialPageRoute(
+                        builder:
+                            (_) => CartPage(onPayment: widget.onPayment),
+                      ),
                     );
                   },
                 ),
