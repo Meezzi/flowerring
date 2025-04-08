@@ -227,10 +227,22 @@ class _DetailContentViewState extends State<DetailContentView> {
       child:
           widget.tabIndex == 0
               ? ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: const [
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 22,
+                ),
+                children: [
                   SizedBox(height: 8),
-                  Text('테스트설명'),
+                  Text(
+                    '재고: ${widget.product.stock}개',
+                    textAlign: TextAlign.right,
+
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                  Text(
+                    widget.product.content,
+                    style: const TextStyle(fontSize: 15),
+                  ),
                   SizedBox(height: 8),
                 ],
               )
