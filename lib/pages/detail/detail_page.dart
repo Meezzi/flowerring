@@ -68,7 +68,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.shopping_cart),
+            icon: const Icon(Icons.shopping_cart_outlined),
             onPressed: () {
               ///싱글톤 카드에 추가
               Cart().addProduct(product, quantityController.quantity);
@@ -84,8 +84,7 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-      body: 
-      Column(
+      body: Column(
         children: [
           DetailImageSection(imageUrl: product.imageUrl),
 
@@ -113,35 +112,36 @@ class _DetailPageState extends State<DetailPage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.shopping_cart),
-                  onPressed: () {
-                    /// 싱글톤 장바구니에 추가
-                    Cart().addProduct(product, quantityController.quantity);
-
-                    // 장바구니 이동
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => CartPage(onPayment: widget.onPayment),
+            Transform.translate(
+              offset: const Offset(0, -6),
+              child: Container(
+                width: 56,
+                height: 56,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey, width: 1.5),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.shopping_cart_outlined,
+                      size: 24,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${quantityController.quantity}개',
+                      style: const TextStyle(
+                        fontSize: 10,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w500,
                       ),
-                    );
-                  },
+                    ),
+                  ],
                 ),
-                Text(
-                  quantityController.quantity > 1
-                      ? '${quantityController.quantity}'
-                      : '',
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+              ),
             ),
 
             const SizedBox(width: 12),
