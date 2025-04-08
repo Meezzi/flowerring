@@ -1,4 +1,5 @@
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flowerring/pages/detail/detail_page.dart';
 import 'package:flowerring/pages/list/widgets/product_item.dart';
 import 'package:flowerring/pages/registration/registration_page.dart';
@@ -39,8 +40,17 @@ class _ListPageState extends State<ListPage> {
         title: const Text('플라워링'),
         actions: [
           IconButton(
-            onPressed: () {},
             icon: Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return CartPage();
+                  },
+                ),
+              );
+            },
           ),
         ],
       ),
