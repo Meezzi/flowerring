@@ -110,6 +110,20 @@ class _CartPageState extends State<CartPage> {
   Widget _payButton() {
     return ElevatedButton(
       onPressed: () {
+        final selectedItems =
+            Cart().items.where((item) => item.isSelected).toList();
+
+        // 선택한 상품이 비어있으면 Dialog 표시
+        if (selectedItems.isEmpty) {
+          DialogHelper.showCupertinoYesNoDialog(
+            context: context,
+            title: '알림',
+            content: '결제할 상품을 선택해주세요',
+          );
+          return;
+        }
+
+        // 선택한 상품만 결제
         DialogHelper.showCupertinoYesNoDialog(
           context: context,
           title: '결제',
