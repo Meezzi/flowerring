@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 class QuantityController extends ChangeNotifier {
   int _quantity = 1;
   int unitPrice;
-  final int stock;
+  final Product product; // 실시간 재고 확인용
 
-  QuantityController({required this.unitPrice, required this.stock});
+  QuantityController({required this.unitPrice, required this.product});
 
   ///수량에 따라 자동으로 계산된 가격
   int get quantity => _quantity;
@@ -19,7 +19,8 @@ class QuantityController extends ChangeNotifier {
   int get totalPrice => _quantity * unitPrice;
 
   void increment(BuildContext context) {
-    if (_quantity < stock) {
+    if (_quantity < product.stock) {
+      ///실시간 재고 사용
       _quantity++;
       notifyListeners();
     } else {
@@ -32,6 +33,11 @@ class QuantityController extends ChangeNotifier {
       _quantity--;
       notifyListeners();
     }
+  }
+
+  void resetQuantity() {
+    _quantity = 1;
+    notifyListeners(); // UI 업데이트 반영
   }
 }
 
@@ -60,7 +66,7 @@ void showPaymentConfirmationDialog(
   BuildContext context,
   Product product,
   QuantityController quantityController, {
-  required VoidCallback onPurchase, //콜백 추가
+  required Future<bool> Function() onPurchase, //콜백 추가
 }) {
   showCupertinoDialog(
     context: context,
@@ -74,34 +80,37 @@ void showPaymentConfirmationDialog(
           CupertinoDialogAction(
             child: Text('취소'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(); // 다이얼로그 닫기만
             },
           ),
+
           CupertinoDialogAction(
             child: Text('확인'),
-            onPressed: () {
-              Navigator.of(context).pop(); // 첫 번째 팝업
-              onPurchase();
+            onPressed: () async {
+              Navigator.of(context).pop(); // 첫 번째 팝업 닫기
 
-              ///콜백 실행
+              final success = await onPurchase(); // 결제 시도
 
-              showCupertinoDialog(
-                context: context,
-                builder: (context) {
-                  return CupertinoAlertDialog(
-                    title: Text('구매 완료'),
-                    content: Text('결제가 완료되었습니다!'),
-                    actions: [
-                      CupertinoDialogAction(
-                        child: Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop(); // 두 번째 팝업 닫기
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              if (success) {
+                // 결제 성공 시 완료 팝업
+                showCupertinoDialog(
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      title: Text('구매 완료'),
+                      content: Text('결제가 완료되었습니다!'),
+                      actions: [
+                        CupertinoDialogAction(
+                          child: Text('확인'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // 완료 팝업 닫기
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
           ),
         ],
