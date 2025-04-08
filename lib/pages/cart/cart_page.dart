@@ -91,15 +91,14 @@ class _CartPageState extends State<CartPage> {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
-          child: SizedBox(width: double.infinity, child: _payButton()),
+          padding: const EdgeInsets.all(16.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: CommonButton(buttonTitle: '결제하기', onPressed: onPressed),
+          ),
         ),
       ],
     );
-  }
-
-  Widget _payButton() {
-    return Text('결제');
   }
 
   void onPressed() {
