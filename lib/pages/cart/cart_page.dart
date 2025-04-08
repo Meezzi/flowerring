@@ -1,5 +1,5 @@
+import 'package:flowerring/common/widgets/dialog_helper.dart';
 import 'package:flowerring/model/cart_item.dart';
-import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
@@ -105,10 +105,18 @@ class _CartPageState extends State<CartPage> {
   Widget _payButton() {
     return ElevatedButton(
       onPressed: () {
-        widget.onPayment(Cart().items);
-        Cart().clearProduct();
-        Navigator.pop(context);
-        Navigator.pop(context);
+        DialogHelper.showCupertinoYesNoDialog(
+          context: context,
+          title: '결제',
+          content: '결제 하시겠어요?',
+          onYes:
+              () => {
+                widget.onPayment(Cart().items),
+                Cart().clearProduct(),
+                Navigator.pop(context),
+                Navigator.pop(context),
+              },
+        );
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
