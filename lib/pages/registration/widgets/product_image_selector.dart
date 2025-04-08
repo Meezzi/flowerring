@@ -2,16 +2,16 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-class ProductImgageSelector extends StatefulWidget {
+class ProductImageSelector extends StatefulWidget {
   final void Function(String) onImageSelected;
 
-  const ProductImgageSelector({super.key, required this.onImageSelected});
+  const ProductImageSelector({super.key, required this.onImageSelected});
 
   @override
-  State<ProductImgageSelector> createState() => _ProductImageSelectorState();
+  State<ProductImageSelector> createState() => _ProductImageSelectorState();
 }
 
-class _ProductImageSelectorState extends State<ProductImgageSelector> {
+class _ProductImageSelectorState extends State<ProductImageSelector> {
   // image 관련
   final List<String> imagePaths = [
     'assets/images/apple.jpg',
@@ -20,6 +20,8 @@ class _ProductImageSelectorState extends State<ProductImgageSelector> {
     'assets/images/sample.jpg',
   ];
   String? _selectedImage;
+
+  // 이미지 선택하세요 클릭시 랜덤 이미지 보여주기
   void _showRandomImage() {
     showDialog(
       context: context,
