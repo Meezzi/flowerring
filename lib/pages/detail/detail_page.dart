@@ -43,11 +43,7 @@ class _DetailPageState extends State<DetailPage> {
     final product = widget.product;
 
     return Scaffold(
-      backgroundColor: Colors.white,
-
-      /// 전체 배경 흰색
       appBar: AppBar(
-        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
