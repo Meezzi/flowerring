@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 final ThemeData lightTheme = ThemeData(
+  scaffoldBackgroundColor: Colors.white,
+  appBarTheme: AppBarTheme(backgroundColor: Colors.white),
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(primary: Color.fromARGB(255, 255, 118, 118)),
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -12,4 +14,3 @@ final ThemeData lightTheme = ThemeData(
     ),
   ),
 );
-//
