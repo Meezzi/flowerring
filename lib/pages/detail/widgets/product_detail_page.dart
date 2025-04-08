@@ -194,45 +194,56 @@ class _DetailContentViewState extends State<DetailContentView> {
   }
 
   void _openReviewModal() {
-    showReviewModal(
-      context,
-      () => Navigator.of(context).pop(),
-      (int rating, String content) {
-        _addReview(rating, content); // 리뷰 추가
-      },
-    );
+    showReviewModal(context, () => Navigator.of(context).pop(), (
+      int rating,
+      String content,
+    ) {
+      _addReview(rating, content); // 리뷰 추가
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: widget.tabIndex == 0
-          ? ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: const [
-                SizedBox(height: 8),
-                Text('테스트설명'),
-                SizedBox(height: 8),
-              ],
-            )
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
+      child:
+          widget.tabIndex == 0
+              ? ListView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 22,
+                ),
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const headerTitle(),
-                      writeButton(onTap: _openReviewModal),
-                    ],
+                  SizedBox(height: 8),
+                  Text(
+                    '재고: ${widget.product.stock}개',
+                    textAlign: TextAlign.right,
+                    style: const TextStyle(fontSize: 13),
                   ),
-                  const SizedBox(height: 15),
-                  const reviewStatus(),
-                  const SizedBox(height: 35),
-                  reviewList(reviews: _reviews),
+                  Text(
+                    widget.product.content,
+                    style: const TextStyle(fontSize: 15),
+                  ),
+                  SizedBox(height: 8),
                 ],
+              )
+              : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const headerTitle(),
+                        writeButton(onTap: _openReviewModal),
+                      ],
+                    ),
+                    const SizedBox(height: 15),
+                    const reviewStatus(),
+                    const SizedBox(height: 35),
+                    reviewList(reviews: _reviews),
+                  ],
+                ),
               ),
-            ),
     );
   }
 }

@@ -10,11 +10,7 @@ class DetailPage extends StatefulWidget {
   final Product product;
   final Function onPayment;
 
-  const DetailPage({
-    super.key,
-    required this.product,
-    required this.onPayment,
-  });
+  const DetailPage({super.key, required this.product, required this.onPayment});
   @override
   State<DetailPage> createState() => _DetailPageState();
 }
@@ -113,7 +109,7 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
 
-      ///하단 장바구니 + 결제 버튼
+      /// 하단 장바구니 + 결제 버튼
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -125,20 +121,18 @@ class _DetailPageState extends State<DetailPage> {
                 IconButton(
                   icon: const Icon(Icons.shopping_cart),
                   onPressed: () {
-                    ///싱글톤 카드에 추가
+                    /// 싱글톤 장바구니에 추가
                     Cart().addProduct(product, quantityController.quantity);
 
                     // 장바구니 이동
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder:
-                            (_) => CartPage(onPayment: widget.onPayment),
+                        builder: (_) => CartPage(onPayment: widget.onPayment),
                       ),
                     );
                   },
                 ),
-
                 Text(
                   quantityController.quantity > 1
                       ? '${quantityController.quantity}'
@@ -153,6 +147,7 @@ class _DetailPageState extends State<DetailPage> {
             ),
 
             const SizedBox(width: 12),
+
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 13),
@@ -167,7 +162,23 @@ class _DetailPageState extends State<DetailPage> {
                       context,
                       product,
                       quantityController,
-                      
+                      onPurchase: () {
+                        setState(() {
+                          // 재고 차감
+                          product.stock -= quantityController.quantity;
+                        });
+
+                        // 장바구니에 담기
+                        Cart().addProduct(product, quantityController.quantity);
+
+                        // 상세 페이지 -> 리스트 페이지로 이동
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const ListPage()),
+                        );
+                      },
+                    );
+                  },
                   child: const Text(
                     '결제하기',
                     style: TextStyle(fontWeight: FontWeight.bold),
