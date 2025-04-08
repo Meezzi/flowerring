@@ -138,13 +138,6 @@ class _CartPageState extends State<CartPage> {
           },
         );
       },
-      style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: const Color.fromRGBO(255, 118, 118, 1.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
       child: const Text(
         '결제하기',
         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
