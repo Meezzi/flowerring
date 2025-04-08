@@ -1,6 +1,10 @@
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/model/review.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
+import 'package:flowerring/pages/review/review_modal_controller.dart';
 import 'package:flutter/material.dart';
+import '../../review/widgets/review_detail_page.dart';
+
 
 ///상세페이지 이미지 클래스
 class DetailImageSection extends StatelessWidget {
@@ -151,7 +155,7 @@ class DetailTabSelector extends StatelessWidget {
 }
 
 /// 상세페이지 상품설명 리뷰 내용 클래스
-class DetailContentView extends StatelessWidget {
+class DetailContentView extends StatefulWidget {
   final int tabIndex;
   final Product product;
 
@@ -162,33 +166,67 @@ class DetailContentView extends StatelessWidget {
   });
 
   @override
+  State<DetailContentView> createState() => _DetailContentViewState();
+}
+
+class _DetailContentViewState extends State<DetailContentView> {
+  List<Review> _reviews = [];
+
+  // 리뷰 추가 함수
+  void _addReview(int rating, String content) {
+    final newReview = Review(
+      username: '익명 사용자',
+      profileImageUrl: 'https://via.placeholder.com/150',
+      rating: rating.toDouble(),
+      content: content,
+      formattedDate: DateTime.now().toString().split(' ').first,
+    );
+
+    setState(() {
+      _reviews.insert(0, newReview); // 최신순으로 추가
+    });
+  }
+
+  void _openReviewModal() {
+    showReviewModal(
+      context,
+      () => Navigator.of(context).pop(),
+      (int rating, String content) {
+        _addReview(rating, content); // 리뷰 추가
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Expanded(
-      child:
-          tabIndex == 0
-              ? ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: widget.tabIndex == 0
+          ? ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              children: const [
+                SizedBox(height: 8),
+                Text('테스트설명'),
+                SizedBox(height: 8),
+              ],
+            )
+          : Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 children: [
-                  const SizedBox(height: 8),
-                  Text('테스트설명'),
-
-                  ///Text(product.description), 실제 상품 설명 나중에 설정
-                  const SizedBox(height: 8),
-                ],
-              )
-              : ListView(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                children: const [
-                  SizedBox(height: 8),
-                  Text('⭐️ 4.8 | 총 20개의 리뷰가 있습니다'),
-                  SizedBox(height: 8),
-                  Text('“진짜 거의 새제품이었어요! 대박 만족 ”'),
-                  SizedBox(height: 8),
-                  Text('“배송도 빠르고 제품 상태 완전 좋아요.”'),
-                  SizedBox(height: 8),
-                  Text('“감사합니다! 다음에도 구매할게요.”'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const headerTitle(),
+                      writeButton(onTap: _openReviewModal),
+                    ],
+                  ),
+                  const SizedBox(height: 15),
+                  const reviewStatus(),
+                  const SizedBox(height: 35),
+                  reviewList(reviews: _reviews),
                 ],
               ),
+            ),
     );
   }
 }

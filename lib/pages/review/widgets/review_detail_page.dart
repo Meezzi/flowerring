@@ -22,46 +22,34 @@ class headerTitle extends StatelessWidget {
 }
 // 리뷰 탭 리뷰작성 버튼
 class writeButton extends StatelessWidget {
-  final Function(int, String) onReviewAdded;
+  final VoidCallback onTap;
 
-  const writeButton({super.key, required this.onReviewAdded});
+  const writeButton({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 45,
       child: ElevatedButton(
-        onPressed: () {
-          showReviewModal(
-            context,
-            () {
-              Navigator.of(context).pop();
-            },
-            (rating, content) {
-              onReviewAdded(rating, content);
-            },
-          );
-        },
+        onPressed: onTap,
+        child: Row(
+          children: const [
+            Icon(Icons.add),
+            Text("리뷰 등록하기"),
+          ],
+        ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Color.fromRGBO(255, 118, 118, 1),
-          surfaceTintColor: Color.fromRGBO(255, 118, 118, 1),
+          backgroundColor: const Color.fromRGBO(255, 118, 118, 1),
+          surfaceTintColor: const Color.fromRGBO(255, 118, 118, 1),
           foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.add),
-            SizedBox(width: 5),
-            Text("리뷰 등록하기"),
-          ],
-        ),
       ),
     );
   }
 }
+
 
 // 리뷰 상태 위젯 (별점 평균 및 분포 표시)
 class reviewStatus extends StatefulWidget {
@@ -259,13 +247,6 @@ class reviewList extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        Text(
-                          review.formattedDate, // 포맷팅된 날짜 사용
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
                       ],
                     ),
                     const SizedBox(height: 4),
@@ -284,67 +265,6 @@ class reviewList extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-// 리뷰 섹션 위젯
-class ReviewSection extends StatefulWidget {
-  final List<Review> initialReviews;
-
-  const ReviewSection({super.key, required this.initialReviews});
-
-  @override
-  State<ReviewSection> createState() => _ReviewSectionState();
-}
-
-class _ReviewSectionState extends State<ReviewSection> {
-  final GlobalKey<_ReviewStatusState> reviewStatusKey =
-      GlobalKey<_ReviewStatusState>();
-
-  late List<Review> reviews;
-
-  @override
-  void initState() {
-    super.initState();
-    reviews = List.from(widget.initialReviews); // 초기 리뷰 데이터 설정
-  }
-
-  void addReview(int rating, String content) {
-    setState(() {
-      reviews.insert(
-        0,
-        Review(
-          username: "current_user",
-          profileImageUrl: "https://example.com/current_user.jpg",
-          rating: rating.toDouble(),
-          date: DateTime.now(),
-          content: content,
-        ),
-      );
-    });
-    reviewStatusKey.currentState?.addReview(rating);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const headerTitle(),
-              writeButton(onReviewAdded: addReview),
-            ],
-          ),
-          const SizedBox(height: 15),
-          reviewStatus(key: reviewStatusKey),
-          reviewList(reviews: reviews),
-        ],
-      ),
     );
   }
 }
