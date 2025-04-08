@@ -94,7 +94,7 @@ class _CartPageState extends State<CartPage> {
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(
             width: double.infinity,
-            child: CommonButton(buttonTitle: '결제하기', onPressed: onPressed),
+            child: CommonButton(onPressed: onPressed, child: Text('결제하기')),
           ),
         ),
       ],

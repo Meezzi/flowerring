@@ -194,7 +194,7 @@ class _DetailPageState extends State<DetailPage> {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 13),
                 child: CommonButton(
-                  buttonTitle: '결제하기',
+                  child: Text('결제하기'),
                   onPressed: () {
                     if (widget.product.stock == 0) {
                       // 재고가 0이면 결제창 띄우지 않고 경고만

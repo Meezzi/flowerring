@@ -1,3 +1,4 @@
+import 'package:flowerring/common/widgets/common_button.dart';
 import 'package:flutter/material.dart';
 import '../review_modal_controller.dart';
 import '../../../model/review.dart';
@@ -30,22 +31,15 @@ class WriteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: ElevatedButton(
+      child: CommonButton(
         onPressed: onTap,
         child: Row(
-          children: const [
-            Icon(Icons.add),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add, color: Colors.white),
             SizedBox(width: 4),
-            Text("리뷰 등록하기"),
+            Text('리뷰 등록하기'),
           ],
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromRGBO(255, 118, 118, 1),
-          surfaceTintColor: const Color.fromRGBO(255, 118, 118, 1),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
         ),
       ),
     );

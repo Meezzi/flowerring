@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CommonButton extends StatelessWidget {
-  String buttonTitle;
   void Function() onPressed;
+  Widget child;
 
-  CommonButton({required this.buttonTitle, required this.onPressed, super.key});
+  CommonButton({required this.onPressed, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: onPressed, child: Text(buttonTitle));
+    return ElevatedButton(onPressed: onPressed, child: child);
   }
 }

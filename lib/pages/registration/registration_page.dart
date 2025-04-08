@@ -157,7 +157,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 validator: titleValidator,
                                 formKey: _formKey,
                               ),
-                              SizedBox(height: 12),
                               ProductTextField(
                                 label: '상품가격',
                                 hintText: '상품가격을 입력해 주세요.',
@@ -166,7 +165,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 validator: priceValidator,
                                 formKey: _formKey,
                               ),
-                              SizedBox(height: 12),
                               ProductTextField(
                                 label: '상품재고',
                                 hintText: '상품재고를 입력해 주세요.',
@@ -175,7 +173,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 validator: stockValidator,
                                 formKey: _formKey,
                               ),
-                              SizedBox(height: 12),
                               ProductTextField(
                                 label: '상품설명',
                                 hintText: '상품설명을 입력해 주세요.',
@@ -185,7 +182,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 maxLength: 300,
                                 formKey: _formKey,
                               ),
-                              SizedBox(height: 12),
                             ],
                           ),
                         ),
@@ -201,8 +197,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: SizedBox(
                 width: double.infinity,
                 child: CommonButton(
-                  buttonTitle: '등록하기',
                   onPressed: _submitForm,
+                  child: Text('등록하기'),
                 ),
               ),
             ),
