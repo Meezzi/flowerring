@@ -18,6 +18,13 @@ class _ProductImageSelectorState extends State<ProductImageSelector> {
     'assets/images/bag.png',
     'assets/images/nike_phantom_gx.png',
     'assets/images/sample.jpg',
+    'assets/images/bag_set.png',
+    'assets/images/book.png',
+    'assets/images/cardigan.png',
+    'assets/images/flower.png',
+    'assets/images/girl_clothes.png',
+    'assets/images/kids_clothes.png',
+    'assets/images/one_peice.png',
   ];
   String? _selectedImage;
 
