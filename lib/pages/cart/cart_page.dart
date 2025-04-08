@@ -138,10 +138,7 @@ class _CartPageState extends State<CartPage> {
           },
         );
       },
-      child: const Text(
-        '결제하기',
-        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-      ),
+      child: const Text('결제하기'),
     );
   }
 }
