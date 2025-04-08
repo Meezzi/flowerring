@@ -163,16 +163,13 @@ class _DetailPageState extends State<DetailPage> {
                       onPurchase: () {
                         setState(() {
                           // 재고 차감
-                          product.stock -= quantityController.quantity;
+                          widget.product.stock -= quantityController.quantity;
                         });
 
                         // 장바구니에 담기
-                        Cart().addProduct(product, quantityController.quantity);
-
-                        // 상세 페이지 -> 리스트 페이지로 이동
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (_) => const ListPage()),
+                        Cart().addProduct(
+                          widget.product,
+                          quantityController.quantity,
                         );
                       },
                     );

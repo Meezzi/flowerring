@@ -82,9 +82,6 @@ void showPaymentConfirmationDialog(
             onPressed: () {
               Navigator.of(context).pop(); // 첫 번째 팝업
               onPurchase();
-
-              ///콜백 실행
-
               showCupertinoDialog(
                 context: context,
                 builder: (context) {
@@ -95,7 +92,9 @@ void showPaymentConfirmationDialog(
                       CupertinoDialogAction(
                         child: Text('확인'),
                         onPressed: () {
-                          Navigator.of(context).pop(); // 두 번째 팝업 닫기
+                          Navigator.of(context).pop();
+
+                          ///콜백 실행 // 두 번째 팝업 닫기
                         },
                       ),
                     ],
