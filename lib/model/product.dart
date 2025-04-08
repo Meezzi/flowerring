@@ -1,5 +1,5 @@
 class Product {
-  final int id;
+  int id;
   int stock;
   final String imageUrl;
   final String title;
