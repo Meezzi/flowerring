@@ -178,6 +178,25 @@ class DetailContentView extends StatefulWidget {
 class _DetailContentViewState extends State<DetailContentView> {
   List<Review> _reviews = [];
 
+  double get averageRating {
+    if (_reviews.isEmpty) return 0.0;
+    double sum = _reviews.fold(0.0, (acc, r) => acc + r.rating);
+    return sum / _reviews.length;
+  }
+
+  int get totalReviews => _reviews.length;
+
+  List<int> get ratingDistribution {
+    List<int> distribution = List.filled(5, 0); // index 0 = 1점, ..., 4 = 5점
+    for (var review in _reviews) {
+      int index = review.rating.round() - 1;
+      if (index >= 0 && index < 5) {
+        distribution[index]++;
+      }
+    }
+    return distribution;
+  }
+
   // 리뷰 추가 함수
   void _addReview(int rating, String content) {
     final newReview = Review(
@@ -194,45 +213,52 @@ class _DetailContentViewState extends State<DetailContentView> {
   }
 
   void _openReviewModal() {
-    showReviewModal(
-      context,
-      () => Navigator.of(context).pop(),
-      (int rating, String content) {
-        _addReview(rating, content); // 리뷰 추가
-      },
-    );
+    showReviewModal(context, () => Navigator.of(context).pop(), (
+      int rating,
+      String content,
+    ) {
+      _addReview(rating, content); // 리뷰 추가
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: widget.tabIndex == 0
-          ? ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              children: const [
-                SizedBox(height: 8),
-                Text('테스트설명'),
-                SizedBox(height: 8),
-              ],
-            )
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child:
+          widget.tabIndex == 0
+              ? ListView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                children: const [
+                  SizedBox(height: 8),
+                  Text('테스트설명'),
+                  SizedBox(height: 8),
+                ],
+              )
+              : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const headerTitle(),
-                      writeButton(onTap: _openReviewModal),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const headerTitle(),
+                          writeButton(onTap: _openReviewModal),
+                        ],
+                      ),
+                      const SizedBox(height: 15),
+                      ReviewStatus(
+                        averageRating: averageRating,
+                        totalReviews: totalReviews,
+                        ratingDistribution: ratingDistribution,
+                      ),
+                      const SizedBox(height: 15),
+                      reviewList(reviews: _reviews),
                     ],
                   ),
-                  const SizedBox(height: 15),
-                  const reviewStatus(),
-                  const SizedBox(height: 35),
-                  reviewList(reviews: _reviews),
-                ],
+                ),
               ),
-            ),
     );
   }
 }
