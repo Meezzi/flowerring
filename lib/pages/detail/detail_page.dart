@@ -1,3 +1,4 @@
+import 'package:flowerring/common/widgets/common_button.dart';
 import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/cart/cart_page.dart';
@@ -192,12 +193,8 @@ class _DetailPageState extends State<DetailPage> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 13),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    backgroundColor: Color.fromRGBO(255, 118, 118, 1.0),
-                    foregroundColor: Colors.white,
-                  ),
+                child: CommonButton(
+                  child: Text('결제하기'),
                   onPressed: () {
                     if (widget.product.stock == 0) {
                       // 재고가 0이면 결제창 띄우지 않고 경고만
@@ -224,10 +221,6 @@ class _DetailPageState extends State<DetailPage> {
                       onPurchase: handlePurchase,
                     );
                   },
-                  child: const Text(
-                    '결제하기',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
                 ),
               ),
             ),

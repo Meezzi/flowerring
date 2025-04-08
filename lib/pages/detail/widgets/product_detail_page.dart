@@ -255,8 +255,8 @@ class _DetailContentViewState extends State<DetailContentView> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const headerTitle(),
-                          writeButton(onTap: _openReviewModal),
+                          const HeaderTitle(),
+                          WriteButton(onTap: _openReviewModal),
                         ],
                       ),
                       const SizedBox(height: 15),
@@ -266,7 +266,7 @@ class _DetailContentViewState extends State<DetailContentView> {
                         ratingDistribution: ratingDistribution,
                       ),
                       const SizedBox(height: 15),
-                      reviewList(reviews: _reviews),
+                      ReviewList(reviews: _reviews),
                     ],
                   ),
                 ),
