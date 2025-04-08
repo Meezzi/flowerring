@@ -37,6 +37,9 @@ class ProductTextField extends StatelessWidget {
           style: TextStyle(fontSize: 18),
           decoration: InputDecoration(
             border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color(0xFFFF7676)),
+            ),
             hintText: hintText,
           ),
           validator: validator,
