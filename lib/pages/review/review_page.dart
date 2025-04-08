@@ -1,3 +1,4 @@
+import 'package:flowerring/common/widgets/common_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './widgets/review_modal_widgets.dart';
@@ -45,33 +46,36 @@ class _ReviewModalState extends State<ReviewModal> {
               const SizedBox(height: 16),
               buildReviewTextField(_reviewController),
               const SizedBox(height: 16),
-              buildSubmitButton(
-                onPressed: () {
-                  if (_rating > 0 && _reviewController.text.isNotEmpty) {
-                    widget.onSubmit(_rating, _reviewController.text);
-                    widget.onClose(); // 모달 닫기
-                  } else {
-                    showCupertinoDialog(
-                      context: context,
-                      builder:
-                          (context) => AlertDialog(
-                            title: const Text("입력 오류"),
-                            content: const Text("별점과 리뷰 내용을 모두 입력해주세요."),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(context).pop(),
-                                child: const Text("확인"),
-                              ),
-                            ],
-                          ),
-                    );
-                  }
-                },
+              SizedBox(
+                width: double.infinity,
+                child: CommonButton(onPressed: onPressed, child: Text('등록하기')),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void onPressed() {
+    if (_rating > 0 && _reviewController.text.isNotEmpty) {
+      widget.onSubmit(_rating, _reviewController.text);
+      widget.onClose(); // 모달 닫기
+    } else {
+      showCupertinoDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: const Text("입력 오류"),
+              content: const Text("별점과 리뷰 내용을 모두 입력해주세요."),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text("확인"),
+                ),
+              ],
+            ),
+      );
+    }
   }
 }

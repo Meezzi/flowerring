@@ -41,25 +41,7 @@ Widget buildReviewTextField(TextEditingController controller) {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xFFFF7676)),
         ),
-        
       ),
     ),
-  );
-}
-
-/// 리뷰 등록 버튼
-Widget buildSubmitButton({
-  required VoidCallback onPressed,
-  String label = "등록하기",
-}) {
-  return ElevatedButton(
-    onPressed: onPressed,
-    style: ElevatedButton.styleFrom(
-      minimumSize: const Size.fromHeight(55),
-      backgroundColor: const Color(0xFFFF7676),
-      foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-    ),
-    child: Text(label),
   );
 }
