@@ -107,10 +107,8 @@ class _CartPageState extends State<CartPage> {
       onPressed: () {
         widget.onPayment(Cart().items);
         Cart().clearProduct();
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ListPage()),
-        );
+        Navigator.pop(context);
+        Navigator.pop(context);
       },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
