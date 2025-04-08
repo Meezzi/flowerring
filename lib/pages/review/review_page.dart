@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import './widgets/review_modal_widgets.dart';
 
@@ -50,7 +51,7 @@ class _ReviewModalState extends State<ReviewModal> {
                     widget.onSubmit(_rating, _reviewController.text);
                     widget.onClose(); // 모달 닫기
                   } else {
-                    showDialog(
+                    showCupertinoDialog(
                       context: context,
                       builder:
                           (context) => AlertDialog(
