@@ -14,7 +14,7 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-List<Product> _items = [];
+  List<Product> _items = [];
 
   void checkout(List<CartItem> itemsInCart) {
     for (var cartItem in itemsInCart) {
@@ -65,7 +65,7 @@ List<Product> _items = [];
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return CartPage();
+                    return CartPage(onPayment: checkout);
                   },
                 ),
               );
@@ -83,7 +83,13 @@ List<Product> _items = [];
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (_) => DetailPage(product: product)),
+                MaterialPageRoute(
+                  builder:
+                      (_) => DetailPage(
+                        product: product,
+                        onPayment: checkout,
+                      ),
+                ),
               );
             },
             child: ProductItem(product: product),

@@ -4,7 +4,9 @@ import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
 
 class CartPage extends StatefulWidget {
-  const CartPage({super.key});
+  final Function onPayment;
+
+  CartPage({super.key, required this.onPayment});
 
   @override
   State<CartPage> createState() => _CartPageState();
