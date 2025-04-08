@@ -37,6 +37,9 @@ Widget buildReviewTextField(TextEditingController controller) {
         hintText: "리뷰 내용을 입력하세요.",
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.only(top: 12, left: 12),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFFFF7676)),
+        ),
       ),
     ),
   );
@@ -45,7 +48,7 @@ Widget buildReviewTextField(TextEditingController controller) {
 /// 리뷰 등록 버튼
 Widget buildSubmitButton({
   required VoidCallback onPressed,
-  String label = "리뷰 작성",
+  String label = "등록하기",
 }) {
   return ElevatedButton(
     onPressed: onPressed,
