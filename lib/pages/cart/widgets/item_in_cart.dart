@@ -72,7 +72,7 @@ class _ItemInCartState extends State<ItemInCart> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            _productImage(),
+            _productImage(widget.item),
             SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -104,11 +104,11 @@ class _ItemInCartState extends State<ItemInCart> {
     );
   }
 
-  Widget _productImage() {
+  Widget _productImage(CartItem item) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
       child: Image.asset(
-        'assets/images/bag.png',
+        item.product.imageUrl,
         width: 80,
         height: 80,
         fit: BoxFit.cover,
