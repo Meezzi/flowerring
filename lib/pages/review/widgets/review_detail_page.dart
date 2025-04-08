@@ -20,6 +20,7 @@ class headerTitle extends StatelessWidget {
     );
   }
 }
+
 // 리뷰 탭 리뷰작성 버튼
 class writeButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -31,12 +32,7 @@ class writeButton extends StatelessWidget {
     return SizedBox(
       child: ElevatedButton(
         onPressed: onTap,
-        child: Row(
-          children: const [
-            Icon(Icons.add),
-            Text("리뷰 등록하기"),
-          ],
-        ),
+        child: Row(children: const [Icon(Icons.add), Text("리뷰 등록하기")]),
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color.fromRGBO(255, 118, 118, 1),
           surfaceTintColor: const Color.fromRGBO(255, 118, 118, 1),
@@ -50,36 +46,18 @@ class writeButton extends StatelessWidget {
   }
 }
 
-
 // 리뷰 상태 위젯 (별점 평균 및 분포 표시)
-class reviewStatus extends StatefulWidget {
-  const reviewStatus({super.key});
+class ReviewStatus extends StatelessWidget {
+  final double averageRating;
+  final int totalReviews;
+  final List<int> ratingDistribution;
 
-  @override
-  State<reviewStatus> createState() => _ReviewStatusState();
-}
-
-class _ReviewStatusState extends State<reviewStatus> {
-  double averageRating = 4.86; // 초기 평균 별점
-  int totalReviews = 468; // 초기 총 리뷰 개수
-  List<int> ratingDistribution = [300, 100, 50, 10, 8]; // 초기 별점 분포 (5점~1점)
-
-  // 새로운 리뷰를 추가하는 메서드
-  void addReview(int newRating) {
-    setState(() {
-      // 새로운 리뷰를 추가
-      totalReviews += 1;
-      ratingDistribution[5 - newRating] += 1;
-
-      // 평균 별점 재계산
-      double totalScore = 0;
-      for (int i = 0; i < 5; i++) {
-        totalScore += (5 - i) * ratingDistribution[i];
-      }
-      averageRating = totalScore / totalReviews;
-    });
-  }
-
+  const ReviewStatus({
+    super.key,
+    required this.averageRating,
+    required this.totalReviews,
+    required this.ratingDistribution,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -91,12 +69,12 @@ class _ReviewStatusState extends State<reviewStatus> {
       ),
       child: IntrinsicHeight(
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center, // 수직 중앙 정렬
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // 왼쪽: 별점 평균, 리뷰 개수
+            // 왼쪽: 평균 별점과 총 리뷰 수
             Column(
-              mainAxisAlignment: MainAxisAlignment.center, // 수직 중앙 정렬
-              crossAxisAlignment: CrossAxisAlignment.center, // 수평 중앙 정렬
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -107,7 +85,7 @@ class _ReviewStatusState extends State<reviewStatus> {
                       size: 30,
                     ),
                     Text(
-                      averageRating.toStringAsFixed(2), // 소수점 2자리까지 표시
+                      averageRating.toStringAsFixed(2),
                       style: const TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
@@ -126,14 +104,15 @@ class _ReviewStatusState extends State<reviewStatus> {
                 ),
               ],
             ),
-            const SizedBox(width: 50), // 왼쪽과 오른쪽 사이 간격
-            // 오른쪽: 별점 분포 그래프
+            const SizedBox(width: 50),
+
+            // 오른쪽: 별점 분포도
             Expanded(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center, // 수직 중앙 정렬
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(5, (index) {
-                  int rating = 5 - index; // 5점부터 1점까지
-                  int count = ratingDistribution[index];
+                  int rating = 5 - index;
+                  int count = ratingDistribution[rating - 1];
                   double percentage =
                       totalReviews > 0 ? count / totalReviews : 0;
 
@@ -193,6 +172,7 @@ class _ReviewStatusState extends State<reviewStatus> {
     );
   }
 }
+
 // 리뷰 리스트 위젯
 class reviewList extends StatelessWidget {
   final List<Review> reviews;
@@ -201,6 +181,18 @@ class reviewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (reviews.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(vertical: 32.0),
+        child: Center(
+          child: Text(
+            "리뷰가 없습니다.",
+            style: TextStyle(fontSize: 16, color: Colors.grey),
+          ),
+        ),
+      );
+    }
+
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

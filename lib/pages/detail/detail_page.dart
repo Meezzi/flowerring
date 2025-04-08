@@ -47,6 +47,7 @@ class _DetailPageState extends State<DetailPage> {
 
       /// 전체 배경 흰색
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -87,7 +88,8 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-      body: Column(
+      body: 
+      Column(
         children: [
           DetailImageSection(imageUrl: product.imageUrl),
 
