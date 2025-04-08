@@ -127,14 +127,17 @@ class _CartPageState extends State<CartPage> {
         DialogHelper.showCupertinoYesNoDialog(
           context: context,
           title: '결제',
-          content: '결제 하시겠어요?',
-          onYes:
-              () => {
-                widget.onPayment(Cart().items),
-                Cart().clearProduct(),
-                Navigator.pop(context),
-                Navigator.pop(context),
-              },
+          content: '선택한 상품을 결제하시겠어요?',
+          onYes: () {
+            widget.onPayment(selectedItems);
+
+            for (final item in selectedItems) {
+              Cart().removeProduct(item);
+            }
+
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
         );
       },
       style: ElevatedButton.styleFrom(
