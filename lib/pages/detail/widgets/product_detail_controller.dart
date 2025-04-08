@@ -66,7 +66,7 @@ void showPaymentConfirmationDialog(
   BuildContext context,
   Product product,
   QuantityController quantityController, {
-  required VoidCallback onPurchase, //콜백 추가
+  required Future<bool> Function() onPurchase, //콜백 추가
 }) {
   showCupertinoDialog(
     context: context,
@@ -80,33 +80,37 @@ void showPaymentConfirmationDialog(
           CupertinoDialogAction(
             child: Text('취소'),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(); // 다이얼로그 닫기만
             },
           ),
+
           CupertinoDialogAction(
             child: Text('확인'),
-            onPressed: () {
-              Navigator.of(context).pop(); // 첫 번째 팝업
-              onPurchase();
-              showCupertinoDialog(
-                context: context,
-                builder: (context) {
-                  return CupertinoAlertDialog(
-                    title: Text('구매 완료'),
-                    content: Text('결제가 완료되었습니다!'),
-                    actions: [
-                      CupertinoDialogAction(
-                        child: Text('확인'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
+            onPressed: () async {
+              Navigator.of(context).pop(); // 첫 번째 팝업 닫기
 
-                          ///콜백 실행 // 두 번째 팝업 닫기
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
+              final success = await onPurchase(); // 결제 시도
+
+              if (success) {
+                // 결제 성공 시 완료 팝업
+                showCupertinoDialog(
+                  context: context,
+                  builder: (context) {
+                    return CupertinoAlertDialog(
+                      title: Text('구매 완료'),
+                      content: Text('결제가 완료되었습니다!'),
+                      actions: [
+                        CupertinoDialogAction(
+                          child: Text('확인'),
+                          onPressed: () {
+                            Navigator.of(context).pop(); // 완료 팝업 닫기
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
           ),
         ],

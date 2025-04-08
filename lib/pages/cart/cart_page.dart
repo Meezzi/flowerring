@@ -122,7 +122,6 @@ class _CartPageState extends State<CartPage> {
             widget.onPayment(selectedItems);
 
             for (final item in selectedItems) {
-              item.product.stock -= item.quantity; //재고 차감
               Cart().removeProduct(item);
             }
 
