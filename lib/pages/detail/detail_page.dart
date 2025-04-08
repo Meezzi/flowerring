@@ -25,7 +25,7 @@ class _DetailPageState extends State<DetailPage> {
     super.initState();
     quantityController = QuantityController(
       unitPrice: widget.product.price,
-      stock: widget.product.stock,
+      product: widget.product,
     );
     quantityController.addListener(() {
       setState(() {}); // 수량 or 가격 변경 시 자동 UI 업데이트
@@ -171,6 +171,7 @@ class _DetailPageState extends State<DetailPage> {
                           widget.product,
                           quantityController.quantity,
                         );
+                        quantityController.resetQuantity(); //수량 리셋
                       },
                     );
                   },

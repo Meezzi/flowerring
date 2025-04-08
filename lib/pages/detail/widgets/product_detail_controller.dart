@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 class QuantityController extends ChangeNotifier {
   int _quantity = 1;
   int unitPrice;
-  final int stock;
+  final Product product; // 실시간 재고 확인용
 
-  QuantityController({required this.unitPrice, required this.stock});
+  QuantityController({required this.unitPrice, required this.product});
 
   ///수량에 따라 자동으로 계산된 가격
   int get quantity => _quantity;
@@ -19,7 +19,8 @@ class QuantityController extends ChangeNotifier {
   int get totalPrice => _quantity * unitPrice;
 
   void increment(BuildContext context) {
-    if (_quantity < stock) {
+    if (_quantity < product.stock) {
+      ///실시간 재고 사용
       _quantity++;
       notifyListeners();
     } else {
@@ -32,6 +33,11 @@ class QuantityController extends ChangeNotifier {
       _quantity--;
       notifyListeners();
     }
+  }
+
+  void resetQuantity() {
+    _quantity = 1;
+    notifyListeners(); // UI 업데이트 반영
   }
 }
 
