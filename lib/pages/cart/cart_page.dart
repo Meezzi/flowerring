@@ -20,8 +20,7 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cart = Cart();
     final cartItems = cart.items;
-    final selectedItems =
-        cartItems.where((item) => item.isSelected).toList();
+    final selectedItems = cartItems.where((item) => item.isSelected).toList();
     final productPrice = selectedItems.fold(
       0,
       (total, item) => total + item.product.price * item.quantity,
@@ -54,10 +53,7 @@ class _CartPageState extends State<CartPage> {
         children: [
           Icon(Icons.shopping_cart_outlined, size: 80, color: Colors.grey),
           SizedBox(height: 16),
-          Text(
-            '상품이 없습니다.',
-            style: TextStyle(fontSize: 18, color: Colors.grey),
-          ),
+          Text('상품이 없습니다.', style: TextStyle(fontSize: 18, color: Colors.grey)),
         ],
       ),
     );
@@ -94,11 +90,7 @@ class _CartPageState extends State<CartPage> {
         ),
 
         Padding(
-          padding: const EdgeInsets.only(
-            left: 12.0,
-            right: 12.0,
-            bottom: 12.0,
-          ),
+          padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
           child: SizedBox(width: double.infinity, child: _payButton()),
         ),
       ],
@@ -130,6 +122,7 @@ class _CartPageState extends State<CartPage> {
             widget.onPayment(selectedItems);
 
             for (final item in selectedItems) {
+              item.product.stock -= item.quantity; //재고 차감
               Cart().removeProduct(item);
             }
 
