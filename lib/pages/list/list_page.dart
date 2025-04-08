@@ -39,8 +39,6 @@ class _ListPageState extends State<ListPage> {
     return Scaffold(
       // 상품 등록 버튼 클릭 시 등록 페이지 이동
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromRGBO(255, 118, 118, 1),
-        foregroundColor: Colors.white,
         child: Icon(Icons.add),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         onPressed: () {
