@@ -14,7 +14,7 @@ class ListPage extends StatefulWidget {
 }
 
 class _ListPageState extends State<ListPage> {
-  List<Product> _items = [];
+  List<Product> _items = Product.getProducts();
 
   void checkout(List<CartItem> itemsInCart) {
     for (var cartItem in itemsInCart) {
@@ -34,8 +34,6 @@ class _ListPageState extends State<ListPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Product.getProducts()로 상품 데이터 가져오기
-    final List<Product> items = Product.getProducts();
     return Scaffold(
       // 상품 등록 버튼 클릭 시 등록 페이지 이동
       floatingActionButton: FloatingActionButton(
@@ -43,8 +41,8 @@ class _ListPageState extends State<ListPage> {
         foregroundColor: Colors.white,
         child: Icon(Icons.add),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          Product product = await Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
@@ -52,6 +50,11 @@ class _ListPageState extends State<ListPage> {
               },
             ),
           );
+          print('product $product');
+          product.id = _items.length + 1;
+          setState(() {
+            _items.add(product);
+          });
         },
       ),
       appBar: AppBar(
@@ -74,9 +77,9 @@ class _ListPageState extends State<ListPage> {
         ],
       ),
       body: ListView.builder(
-        itemCount: items.length,
+        itemCount: _items.length,
         itemBuilder: (context, index) {
-          Product product = items[index];
+          Product product = _items[index];
 
           ///리스트페이지에서 디테일페이지 이동하는 코드
           return GestureDetector(
@@ -85,10 +88,7 @@ class _ListPageState extends State<ListPage> {
                 context,
                 MaterialPageRoute(
                   builder:
-                      (_) => DetailPage(
-                        product: product,
-                        onPayment: checkout,
-                      ),
+                      (_) => DetailPage(product: product, onPayment: checkout),
                 ),
               );
             },
