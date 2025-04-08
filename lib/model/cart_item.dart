@@ -62,4 +62,8 @@ class Cart {
     }
     return totalPrice;
   }
+
+  void clearProduct() {
+    _itemsInCart.clear();
+  }
 }
