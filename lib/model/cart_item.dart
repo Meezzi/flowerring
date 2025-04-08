@@ -4,8 +4,13 @@ import 'package:collection/collection.dart';
 class CartItem {
   final Product product;
   int quantity;
+  bool isSelected;
 
-  CartItem({required this.product, required this.quantity});
+  CartItem({
+    required this.product,
+    required this.quantity,
+    this.isSelected = true,
+  });
 }
 
 class Cart {

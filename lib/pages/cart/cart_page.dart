@@ -20,7 +20,12 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cart = Cart();
     final cartItems = cart.items;
-    final productPrice = cart.getTotalPrice();
+    final selectedItems =
+        cartItems.where((item) => item.isSelected).toList();
+    final productPrice = selectedItems.fold(
+      0,
+      (total, item) => total + item.product.price * item.quantity,
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -105,17 +110,34 @@ class _CartPageState extends State<CartPage> {
   Widget _payButton() {
     return ElevatedButton(
       onPressed: () {
+        final selectedItems =
+            Cart().items.where((item) => item.isSelected).toList();
+
+        // 선택한 상품이 비어있으면 Dialog 표시
+        if (selectedItems.isEmpty) {
+          DialogHelper.showCupertinoYesNoDialog(
+            context: context,
+            title: '알림',
+            content: '결제할 상품을 선택해주세요',
+          );
+          return;
+        }
+
+        // 선택한 상품만 결제
         DialogHelper.showCupertinoYesNoDialog(
           context: context,
           title: '결제',
-          content: '결제 하시겠어요?',
-          onYes:
-              () => {
-                widget.onPayment(Cart().items),
-                Cart().clearProduct(),
-                Navigator.pop(context),
-                Navigator.pop(context),
-              },
+          content: '선택한 상품을 결제하시겠어요?',
+          onYes: () {
+            widget.onPayment(selectedItems);
+
+            for (final item in selectedItems) {
+              Cart().removeProduct(item);
+            }
+
+            Navigator.pop(context);
+            Navigator.pop(context);
+          },
         );
       },
       style: ElevatedButton.styleFrom(

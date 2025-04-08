@@ -18,6 +18,13 @@ class ItemInCart extends StatefulWidget {
 }
 
 class _ItemInCartState extends State<ItemInCart> {
+  void _toggleSelected(bool? value) {
+    setState(() {
+      widget.item.isSelected = value ?? false;
+    });
+    widget.onCartChanged();
+  }
+
   void _showStockExceededDialog() {
     showCupertinoDialog(
       context: context,
@@ -82,8 +89,7 @@ class _ItemInCartState extends State<ItemInCart> {
                   _itemTitle(widget.item.product.title),
                   SizedBox(height: 20),
                   _itemPrice(
-                    widget.item.product.price *
-                        widget.item.quantity,
+                    widget.item.product.price * widget.item.quantity,
                   ),
                 ],
               ),
@@ -117,10 +123,7 @@ class _ItemInCartState extends State<ItemInCart> {
   }
 
   Widget _itemTitle(String title) {
-    return Text(
-      title,
-      style: TextStyle(fontWeight: FontWeight.bold),
-    );
+    return Text(title, style: TextStyle(fontWeight: FontWeight.bold));
   }
 
   Widget _itemPrice(int price) {
@@ -158,14 +161,13 @@ class _ItemInCartState extends State<ItemInCart> {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          child: Row(
-            children: [
-              SizedBox(
-                width: 24,
-                height: 24,
-                child: Checkbox(value: true, onChanged: null),
-              ),
-            ],
+          child: SizedBox(
+            width: 24,
+            height: 24,
+            child: Checkbox(
+              value: widget.item.isSelected,
+              onChanged: _toggleSelected,
+            ),
           ),
         ),
         _closeButton(),
@@ -184,10 +186,7 @@ class _ItemInCartState extends State<ItemInCart> {
           bottom: BorderSide(color: Colors.grey[300]!),
         ),
       ),
-      child: Text(
-        '$quantity',
-        style: const TextStyle(fontSize: 14),
-      ),
+      child: Text('$quantity', style: const TextStyle(fontSize: 14)),
     );
   }
 
