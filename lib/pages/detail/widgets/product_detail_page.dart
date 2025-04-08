@@ -54,6 +54,7 @@ class DetailInfoSection extends StatelessWidget {
                 '${formatPrice(controller.totalPrice)}원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
+
               Row(
                 children: [
                   IconButton(
@@ -63,7 +64,7 @@ class DetailInfoSection extends StatelessWidget {
                   Text('${controller.quantity}'),
                   IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: controller.increment,
+                    onPressed: () => controller.increment(context),
                   ),
                 ],
               ),
@@ -179,7 +180,13 @@ class DetailContentView extends StatelessWidget {
                 ),
                 children: [
                   const SizedBox(height: 8),
-                  Text(product.content),
+
+                  Text(
+                    '재고: ${product.stock}개',
+                    textAlign: TextAlign.right,
+                    style: TextStyle(fontSize: 13),
+                  ),
+                  Text(product.content, style: TextStyle(fontSize: 15)),
 
                   ///Text(product.description), 실제 상품 설명 나중에 설정
                   const SizedBox(height: 8),

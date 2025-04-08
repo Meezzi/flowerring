@@ -21,7 +21,10 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     super.initState();
-    quantityController = QuantityController(unitPrice: widget.product.price);
+    quantityController = QuantityController(
+      unitPrice: widget.product.price,
+      stock: widget.product.stock,
+    );
     quantityController.addListener(() {
       setState(() {}); // 수량 or 가격 변경 시 자동 UI 업데이트
     });
