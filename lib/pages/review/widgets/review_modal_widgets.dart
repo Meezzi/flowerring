@@ -27,6 +27,7 @@ Widget buildStarRating(int currentRating, ValueChanged<int> onChanged) {
 
 /// 리뷰 입력창
 Widget buildReviewTextField(TextEditingController controller) {
+  String? _errorText;
   return SizedBox(
     height: 500,
     child: TextField(
@@ -40,6 +41,7 @@ Widget buildReviewTextField(TextEditingController controller) {
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Color(0xFFFF7676)),
         ),
+        
       ),
     ),
   );
