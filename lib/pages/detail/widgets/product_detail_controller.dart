@@ -1,4 +1,6 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flowerring/model/product.dart';
+import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,8 +8,9 @@ import 'package:flutter/material.dart';
 class QuantityController extends ChangeNotifier {
   int _quantity = 1;
   int unitPrice;
+  final int stock;
 
-  QuantityController({required this.unitPrice});
+  QuantityController({required this.unitPrice, required this.stock});
 
   ///수량에 따라 자동으로 계산된 가격
   int get quantity => _quantity;
@@ -15,10 +18,12 @@ class QuantityController extends ChangeNotifier {
   ///수량과 총 가격 동시에 반영
   int get totalPrice => _quantity * unitPrice;
 
-  void increment() {
-    if (_quantity < 100) {
+  void increment(BuildContext context) {
+    if (_quantity < stock) {
       _quantity++;
       notifyListeners();
+    } else {
+      _showStockLimitPopup(context);
     }
   }
 
@@ -28,6 +33,26 @@ class QuantityController extends ChangeNotifier {
       notifyListeners();
     }
   }
+}
+
+void _showStockLimitPopup(BuildContext context) {
+  showCupertinoDialog(
+    context: context,
+    builder:
+        (_) => CupertinoAlertDialog(
+          title: Text('알림'),
+          content: Text('재고 수량을 초과할 수 없습니다.'),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('확인'),
+              isDefaultAction: true,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        ),
+  );
 }
 
 ///ios스타일 팝업 함수
@@ -54,7 +79,8 @@ void showPaymentConfirmationDialog(
           CupertinoDialogAction(
             child: Text('확인'),
             onPressed: () {
-              Navigator.of(context).pop(); // 첫 번째 팝업 닫기
+              Navigator.of(context).pop(); // 첫 번째 팝업
+
               showCupertinoDialog(
                 context: context,
                 builder: (context) {

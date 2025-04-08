@@ -1,3 +1,4 @@
+import 'package:flowerring/model/cart_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flowerring/pages/cart/widgets/item_in_cart.dart';
 import 'package:flowerring/pages/cart/widgets/payment_summary.dart';
@@ -10,12 +11,14 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  final itemCount = 5;
-  final int productPrice = 20600;
   final int deliveryFee = 0;
 
   @override
   Widget build(BuildContext context) {
+    final cart = Cart();
+    final cartItems = cart.items;
+    final productPrice = cart.getTotalPrice();
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,47 +32,70 @@ class _CartPageState extends State<CartPage> {
         ),
         backgroundColor: Colors.white,
         // 스크롤해도 색상이 달라지지 않도록 설정
-        scrolledUnderElevation: 0
+        scrolledUnderElevation: 0,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              itemCount: itemCount + 1,
-              itemBuilder: (context, index) {
-                if (index == itemCount) {
-                  // item이 모두 표시되면 마지막으로 결제 정보 표시
-                  return Column(
-                    children: [
-                      PaymentSummary(
-                        productPrice: productPrice,
-                        deliveryFee: deliveryFee,
-                      ),
-                    ],
-                  );
-                }
-                return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: ItemInCart(),
-                );
-              },
-            ),
-          ),
+      body:
+          cartItems.isEmpty
+              ? _emptyCartMessage()
+              : _itemInCart(cartItems, productPrice),
+    );
+  }
 
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 12.0,
-              bottom: 12.0,
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: _payButton(),
-            ),
+  Widget _emptyCartMessage() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.shopping_cart_outlined, size: 80, color: Colors.grey),
+          SizedBox(height: 16),
+          Text(
+            '상품이 없습니다.',
+            style: TextStyle(fontSize: 18, color: Colors.grey),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _itemInCart(List<CartItem> cartItems, int productPrice) {
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            itemCount: cartItems.length + 1,
+            itemBuilder: (context, index) {
+              if (index == cartItems.length) {
+                // item이 모두 표시되면 마지막으로 결제 정보 표시
+                return Column(
+                  children: [
+                    PaymentSummary(
+                      productPrice: productPrice,
+                      deliveryFee: deliveryFee,
+                    ),
+                  ],
+                );
+              }
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: ItemInCart(
+                  item: cartItems[index],
+                  onCartChanged: () => setState(() {}),
+                ),
+              );
+            },
+          ),
+        ),
+
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 12.0,
+            right: 12.0,
+            bottom: 12.0,
+          ),
+          child: SizedBox(width: double.infinity, child: _payButton()),
+        ),
+      ],
     );
   }
 
