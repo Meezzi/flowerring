@@ -28,7 +28,6 @@ class _CartPageState extends State<CartPage> {
     );
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         // iOS에서는 기본으로 AppBar title이 가운데 정렬되지만,
         // Android에서는 title이 왼쪽 정렬되기 때문에 centerTitle을 true로 설정
@@ -38,7 +37,6 @@ class _CartPageState extends State<CartPage> {
           icon: Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        backgroundColor: Colors.white,
         // 스크롤해도 색상이 달라지지 않도록 설정
         scrolledUnderElevation: 0,
       ),
