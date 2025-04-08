@@ -20,7 +20,12 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     final cart = Cart();
     final cartItems = cart.items;
-    final productPrice = cart.getTotalPrice();
+    final selectedItems =
+        cartItems.where((item) => item.isSelected).toList();
+    final productPrice = selectedItems.fold(
+      0,
+      (total, item) => total + item.product.price * item.quantity,
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
