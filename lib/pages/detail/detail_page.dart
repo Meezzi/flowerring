@@ -3,6 +3,7 @@ import 'package:flowerring/model/product.dart';
 import 'package:flowerring/pages/cart/cart_page.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_controller.dart';
 import 'package:flowerring/pages/detail/widgets/product_detail_page.dart';
+import 'package:flowerring/pages/list/list_page.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
@@ -166,8 +167,7 @@ class _DetailPageState extends State<DetailPage> {
                       context,
                       product,
                       quantityController,
-                    );
-                  },
+                      
                   child: const Text(
                     '결제하기',
                     style: TextStyle(fontWeight: FontWeight.bold),

@@ -59,8 +59,9 @@ void _showStockLimitPopup(BuildContext context) {
 void showPaymentConfirmationDialog(
   BuildContext context,
   Product product,
-  QuantityController quantityController,
-) {
+  QuantityController quantityController, {
+  required VoidCallback onPurchase, //콜백 추가
+}) {
   showCupertinoDialog(
     context: context,
     builder: (context) {
@@ -80,6 +81,9 @@ void showPaymentConfirmationDialog(
             child: Text('확인'),
             onPressed: () {
               Navigator.of(context).pop(); // 첫 번째 팝업
+              onPurchase();
+
+              ///콜백 실행
 
               showCupertinoDialog(
                 context: context,
