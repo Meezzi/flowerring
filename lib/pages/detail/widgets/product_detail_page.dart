@@ -92,6 +92,9 @@ class DetailTabSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ///현재 테마가 다크모드인지 확인
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         // 탭 선택 영역
@@ -107,7 +110,12 @@ class DetailTabSelector extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: selectedTab == 0 ? Colors.black : Colors.grey,
+
+                        ///선택된 탭일 때 다크모드는 흰색, 라이트모드는 검정색
+                        color:
+                            selectedTab == 0
+                                ? (isDark ? Colors.white : Colors.black)
+                                : Colors.grey,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -125,7 +133,11 @@ class DetailTabSelector extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: selectedTab == 1 ? Colors.black : Colors.grey,
+                        // 선택된 탭일 때 다크모드는 흰색, 라이트모드는 검정색
+                        color:
+                            selectedTab == 1
+                                ? (isDark ? Colors.white : Colors.black)
+                                : Colors.grey,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -141,7 +153,8 @@ class DetailTabSelector extends StatelessWidget {
             Container(
               height: 2,
               width: double.infinity,
-              color: Colors.grey.shade300,
+              // 전체 라인은 테마에 따라 밝거나 어둡게
+              color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
             ),
             Align(
               alignment:
@@ -150,7 +163,10 @@ class DetailTabSelector extends StatelessWidget {
                       : Alignment.centerRight,
               child: FractionallySizedBox(
                 widthFactor: 0.5,
-                child: Container(height: 2, color: Colors.black),
+                child: Container(
+                  height: 2, // 선택된 탭 밑줄은 테마에 따라 색상 변경
+                  color: isDark ? Colors.white : Colors.black,
+                ),
               ),
             ),
           ],
