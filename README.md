@@ -96,6 +96,65 @@
 
 <br>
 
+## 🔧 프로젝트 구조
+```
+```
+📦 
+├─ README.md
+├─ assets
+│  └─ images
+│     ├─ ai-generated2png.png
+│     ├─ ai-generatedjpg.jpg
+│     ├─ apple.jpg
+│     ├─ bag.png
+│     ├─ bag_set.png
+├─ lib
+│  ├─ common
+│  │  └─ widgets
+│  │     ├─ common_button.dart
+│  │     └─ dialog_helper.dart
+│  ├─ main.dart
+│  ├─ model
+│  │  ├─ cart_item.dart
+│  │  ├─ product.dart
+│  │  └─ review.dart
+│  ├─ pages
+│  │  ├─ cart
+│  │  │  ├─ cart_page.dart
+│  │  │  └─ widgets
+│  │  │     ├─ item_in_cart.dart
+│  │  │     └─ payment_summary.dart
+│  │  ├─ detail
+│  │  │  ├─ detail_page.dart
+│  │  │  └─ widgets
+│  │  │     ├─ product_detail_controller.dart
+│  │  │     └─ product_detail_page.dart
+│  │  ├─ list
+│  │  │  ├─ list_page.dart
+│  │  │  └─ widgets
+│  │  │     └─ product_item.dart
+│  │  ├─ registration
+│  │  │  ├─ registration_page.dart
+│  │  │  └─ widgets
+│  │  │     ├─ product_image_selector.dart
+│  │  │     └─ product_text_field.dart
+│  │  └─ review
+│  │     ├─ review_modal_controller.dart
+│  │     ├─ review_page.dart
+│  │     └─ widgets
+│  │        ├─ review_detail_page.dart
+│  │        └─ review_modal_widgets.dart
+│  ├─ theme
+│  │  ├─ dark.dart
+│  │  └─ light.dart
+│  └─ utils
+│     └─ format_price.dart
+├─ pubspec.lock
+├─ pubspec.yaml
+```
+
+<br>
+
 ## 📌 향후 개선 예정
 - 카테고리별 추천 알고리즘 추가
 - 상태 관리 패키지 사용
