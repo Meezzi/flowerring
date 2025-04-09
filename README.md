@@ -1,16 +1,52 @@
 # flowerring
+1조 팀과제 쇼핑몰앱
 
-A new Flutter project.
+### ✅ 주요 기능 요약
 
-## Getting Started
+- 📄 **상품 리스트 페이지**
+    - 앱 실행 시 가장 먼저 보이는 기본 화면
+    - 등록된 상품들이 리스트 형태로 정렬됨
+    - 각 상품은 이미지, 제목, 가격, 재고, 별점을  표시
+    - 항목을 탭하면 해당 상품의 **상세 페이지**로 이동
+    - 상품이 새로 등록되면 리스트에 즉시 반영됨 (`setState` 또는 상태관리 적용)
 
-This project is a starting point for a Flutter application.
+- 🛍️ **상품 등록**
+    - `상품명`, `가격`, `이미지`, `설명`, `재고`를 입력 후 상품 리스트에 추가
+    - 등록된 상품은 리스트 페이지에 실시간으로 반영됨
+    - 입력 필드는 TextField, 이미지 경로는 로컬 `assets` 사용
 
-A few resources to get you started if this is your first Flutter project:
+- 🔍 **상세 페이지**
+    - 상품 이미지 및 설명 표시
+    - 수량 조절 기능 (`+`, `–` 버튼)
+    - 현재 재고 연동
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 🛒 **장바구니 페이지**
+    - 추가된 상품 목록 표시
+    - 총 수량 및 가격 계산
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 💳 **결제 처리**
+    - 결제 버튼 클릭 시 상품 재고 차감
+    - 수량이 재고보다 많을 경우 경고 팝업 표시 (`CupertinoAlertDialog`)
+    - 재고가 0이 되면 결제 불가 알림 표시
+
+- 🌙 **다크모드 대응**
+    - 테마 설정에 따라 UI 스타일 자동 전환 (예: 배경, 텍스트 색상)
+
+- 📝 **리뷰 기능**
+    - **[리뷰 탭 전환]**: 상세 페이지 상단에서 "상품설명 ↔ 리뷰" 전환 가능
+    - **[리뷰 등록]**: 텍스트 입력 후 등록 시, 화면에 리뷰가 바로 반영됨
+    - 사용자가 리뷰를 작성하고 등록하면, 해당 상품의 리뷰 목록과 함께 **평균 평점**이 자동 갱신됩니다.
+    - UI 상단의 별점 표시(`⭐ 4.5 / 5`)가 리뷰 등록 직후 즉시 업데이트되어 사용자에게 즉각적인 피드백을 제공합니다.
+---
+
+### 📂 사용된 기술 스택
+
+- `Flutter` (StatefulWidget 기반 구조)
+- 커스텀 수량 조절 컨트롤러 (`QuantityController`)
+- 싱글톤 패턴 장바구니 모델 (`Cart`)
+- 다크/라이트 테마 (`ThemeMode`)
+- 리뷰 등록 시 `setState()`로 동적 UI 업데이트
+- `setState()`에 의한 UI 실시간 반영
+
+
+---
