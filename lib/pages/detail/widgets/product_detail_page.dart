@@ -110,86 +110,63 @@ class DetailTabSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///현재 테마가 다크모드인지 확인
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Column(
-      children: [
-        // 탭 선택 영역
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () => onTabChanged(0),
-                child: Column(
-                  children: [
-                    Text(
-                      '상품설명',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
+    return DefaultTabController(
+      length: 2,
+      initialIndex: selectedTab,
+      child: Builder(
+        builder: (context) {
+          final TabController tabController = DefaultTabController.of(context);
 
-                        ///선택된 탭일 때 다크모드는 흰색, 라이트모드는 검정색
-                        color:
-                            selectedTab == 0
-                                ? (isDark ? Colors.white : Colors.black)
-                                : Colors.grey,
-                      ),
+          // 탭 변경 시 콜백 호출
+          tabController.addListener(() {
+            if (!tabController.indexIsChanging &&
+                tabController.index != selectedTab) {
+              onTabChanged(tabController.index);
+            }
+          });
+
+          return Column(
+            children: [
+              TabBar(
+                controller: tabController,
+                tabs: const [Tab(text: '상품설명'), Tab(text: '리뷰')],
+                labelColor: isDark ? Colors.white : Colors.black,
+                unselectedLabelColor: Colors.grey,
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                indicator: const BoxDecoration(),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 1.2,
+                      color:
+                          selectedTab == 0
+                              ? (isDark ? Colors.white : Colors.black)
+                              : (isDark
+                                  ? Colors.grey.shade700
+                                  : Colors.grey.shade300),
                     ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () => onTabChanged(1),
-                child: Column(
-                  children: [
-                    Text(
-                      '리뷰',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        // 선택된 탭일 때 다크모드는 흰색, 라이트모드는 검정색
-                        color:
-                            selectedTab == 1
-                                ? (isDark ? Colors.white : Colors.black)
-                                : Colors.grey,
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 1.2,
+                      color:
+                          selectedTab == 1
+                              ? (isDark ? Colors.white : Colors.black)
+                              : (isDark
+                                  ? Colors.grey.shade700
+                                  : Colors.grey.shade300),
                     ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        // 전체 라인 + 하이라인
-        Stack(
-          children: [
-            Container(
-              height: 2,
-              width: double.infinity,
-              // 전체 라인은 테마에 따라 밝거나 어둡게
-              color: isDark ? Colors.grey.shade700 : Colors.grey.shade300,
-            ),
-            Align(
-              alignment:
-                  selectedTab == 0
-                      ? Alignment.centerLeft
-                      : Alignment.centerRight,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                child: Container(
-                  height: 2, // 선택된 탭 밑줄은 테마에 따라 색상 변경
-                  color: isDark ? Colors.white : Colors.black,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          );
+        },
+      ),
     );
   }
 }
