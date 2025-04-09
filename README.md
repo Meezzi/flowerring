@@ -59,13 +59,6 @@
 
 <br>
 
-### 💳 결제 처리
-- 결제 버튼 클릭 시 상품 재고 차감
-- 수량이 재고보다 많을 경우 경고 팝업 표시 (`CupertinoAlertDialog`)
-- 재고가 0이 되면 결제 불가 알림 표시
-
-<br>
-
 ###  📝 리뷰 작성
 <img src="https://github.com/user-attachments/assets/9d71b773-3503-40a3-a486-19f93f2f4071" width="300" height="700"/>
 <img src="https://github.com/user-attachments/assets/b1e18305-c70d-432d-8be4-722621925d55" width="300" height="700"/>
@@ -86,7 +79,7 @@
 
 <br>
 
-### 📂 사용된 기술 스택
+## 📂 사용된 기술 스택
 
 - `Flutter` (StatefulWidget 기반 구조)
 - 커스텀 수량 조절 컨트롤러 (`QuantityController`)
@@ -95,5 +88,18 @@
 - 리뷰 등록 시 `setState()`로 동적 UI 업데이트
 - `setState()`에 의한 UI 실시간 반영
 
+<br>
 
----
+## 🗂️ Figma 링크
+
+👉 [Figma 와이어프레임 바로가기](https://www.figma.com/design/DfHOe1BnOEW2wwbE7J7IrH/주특기-기초-_1조?node-id=0-1&t=utMhZB7NeviDYk3B-1)
+
+<br>
+
+## 📌 향후 개선 예정
+- 카테고리별 추천 알고리즘 추가
+- 상태 관리 패키지 사용
+- 갤러리에서 이미지 선택
+- Firebase 연동
+
+<br>
