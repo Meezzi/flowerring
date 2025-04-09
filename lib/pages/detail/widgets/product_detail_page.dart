@@ -198,7 +198,7 @@ class DetailTabSelector extends StatelessWidget {
 class DetailContentView extends StatefulWidget {
   final int tabIndex;
   final Product product;
-  final Function(double averageRating, int totalReviews) onRatingChanged; //
+  final Function(double averageRating, int totalReviews) onRatingChanged;
 
   const DetailContentView({
     required this.tabIndex,
