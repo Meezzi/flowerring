@@ -21,16 +21,25 @@ class DetailImageSection extends StatelessWidget {
 }
 
 ///상세페이지 정보 클래스
-class DetailInfoSection extends StatelessWidget {
+class DetailInfoSection extends StatefulWidget {
   final Product product;
   final QuantityController controller;
+  final double averageRating;
+  final int totalReviews;
 
   const DetailInfoSection({
     required this.product,
     required this.controller,
+    required this.averageRating,
+    required this.totalReviews,
     super.key,
   });
 
+  @override
+  State<DetailInfoSection> createState() => _DetailInfoSectionState();
+}
+
+class _DetailInfoSectionState extends State<DetailInfoSection> {
   String formatPrice(int price) {
     final formatter = NumberFormat('#,###');
     return formatter.format(price);
@@ -44,17 +53,26 @@ class DetailInfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            product.title,
+            widget.product.title,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Row(children: [starScore(product.rate)]),
+          Row(
+            children: [
+              starScore(context, widget.averageRating),
+              SizedBox(width: 20),
+              Text(
+                '리뷰 ${widget.totalReviews}개',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${formatPrice(controller.totalPrice)}원',
+                '${formatPrice(widget.controller.totalPrice)}원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
 
@@ -62,12 +80,12 @@ class DetailInfoSection extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.remove),
-                    onPressed: controller.decrement,
+                    onPressed: widget.controller.decrement,
                   ),
-                  Text('${controller.quantity}'),
+                  Text('${widget.controller.quantity}'),
                   IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: () => controller.increment(context),
+                    onPressed: () => widget.controller.increment(context),
                   ),
                 ],
               ),
@@ -180,10 +198,12 @@ class DetailTabSelector extends StatelessWidget {
 class DetailContentView extends StatefulWidget {
   final int tabIndex;
   final Product product;
+  final Function(double averageRating, int totalReviews) onRatingChanged; //
 
   const DetailContentView({
     required this.tabIndex,
     required this.product,
+    required this.onRatingChanged,
     super.key,
   });
 
@@ -226,6 +246,11 @@ class _DetailContentViewState extends State<DetailContentView> {
     setState(() {
       _reviews.insert(0, newReview); // 최신순으로 추가
     });
+
+    /// 리뷰 추가 후 평균 별점 계산 & 상위 콜백 호출
+    final sum = _reviews.fold(0.0, (acc, r) => acc + r.rating);
+    final average = sum / _reviews.length;
+    widget.onRatingChanged(average, _reviews.length);
   }
 
   void _openReviewModal() {
