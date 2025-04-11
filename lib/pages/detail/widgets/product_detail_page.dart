@@ -21,16 +21,25 @@ class DetailImageSection extends StatelessWidget {
 }
 
 ///상세페이지 정보 클래스
-class DetailInfoSection extends StatelessWidget {
+class DetailInfoSection extends StatefulWidget {
   final Product product;
   final QuantityController controller;
+  final double averageRating;
+  final int totalReviews;
 
   const DetailInfoSection({
     required this.product,
     required this.controller,
+    required this.averageRating,
+    required this.totalReviews,
     super.key,
   });
 
+  @override
+  State<DetailInfoSection> createState() => _DetailInfoSectionState();
+}
+
+class _DetailInfoSectionState extends State<DetailInfoSection> {
   String formatPrice(int price) {
     final formatter = NumberFormat('#,###');
     return formatter.format(price);
@@ -44,17 +53,26 @@ class DetailInfoSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            product.title,
+            widget.product.title,
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 8),
-          Row(children: [starScore(product.rate)]),
+          Row(
+            children: [
+              starScore(context, widget.averageRating),
+              SizedBox(width: 20),
+              Text(
+                '리뷰 ${widget.totalReviews}개',
+                style: TextStyle(fontSize: 12, color: Colors.grey),
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                '${formatPrice(controller.totalPrice)}원',
+                '${formatPrice(widget.controller.totalPrice)}원',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
 
@@ -62,12 +80,12 @@ class DetailInfoSection extends StatelessWidget {
                 children: [
                   IconButton(
                     icon: const Icon(Icons.remove),
-                    onPressed: controller.decrement,
+                    onPressed: widget.controller.decrement,
                   ),
-                  Text('${controller.quantity}'),
+                  Text('${widget.controller.quantity}'),
                   IconButton(
                     icon: const Icon(Icons.add),
-                    onPressed: () => controller.increment(context),
+                    onPressed: () => widget.controller.increment(context),
                   ),
                 ],
               ),
@@ -92,70 +110,63 @@ class DetailTabSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        // 탭 선택 영역
-        Row(
-          children: [
-            Expanded(
-              child: GestureDetector(
-                onTap: () => onTabChanged(0),
-                child: Column(
-                  children: [
-                    Text(
-                      '상품설명',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: selectedTab == 0 ? Colors.black : Colors.grey,
-                      ),
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return DefaultTabController(
+      length: 2,
+      initialIndex: selectedTab,
+      child: Builder(
+        builder: (context) {
+          final TabController tabController = DefaultTabController.of(context);
+
+          // 탭 변경 시 콜백 호출
+          tabController.addListener(() {
+            if (!tabController.indexIsChanging &&
+                tabController.index != selectedTab) {
+              onTabChanged(tabController.index);
+            }
+          });
+
+          return Column(
+            children: [
+              TabBar(
+                controller: tabController,
+                tabs: const [Tab(text: '상품설명'), Tab(text: '리뷰')],
+                labelColor: isDark ? Colors.white : Colors.black,
+                unselectedLabelColor: Colors.grey,
+                labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                indicator: const BoxDecoration(),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 1.2,
+                      color:
+                          selectedTab == 0
+                              ? (isDark ? Colors.white : Colors.black)
+                              : (isDark
+                                  ? Colors.grey.shade700
+                                  : Colors.grey.shade300),
                     ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
-              ),
-            ),
-            Expanded(
-              child: GestureDetector(
-                onTap: () => onTabChanged(1),
-                child: Column(
-                  children: [
-                    Text(
-                      '리뷰',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: selectedTab == 1 ? Colors.black : Colors.grey,
-                      ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 1.2,
+                      color:
+                          selectedTab == 1
+                              ? (isDark ? Colors.white : Colors.black)
+                              : (isDark
+                                  ? Colors.grey.shade700
+                                  : Colors.grey.shade300),
                     ),
-                    const SizedBox(height: 8),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        // 전체 라인 + 하이라인
-        Stack(
-          children: [
-            Container(
-              height: 2,
-              width: double.infinity,
-              color: Colors.grey.shade300,
-            ),
-            Align(
-              alignment:
-                  selectedTab == 0
-                      ? Alignment.centerLeft
-                      : Alignment.centerRight,
-              child: FractionallySizedBox(
-                widthFactor: 0.5,
-                child: Container(height: 2, color: Colors.black),
-              ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          );
+        },
+      ),
     );
   }
 }
@@ -164,10 +175,12 @@ class DetailTabSelector extends StatelessWidget {
 class DetailContentView extends StatefulWidget {
   final int tabIndex;
   final Product product;
+  final Function(double averageRating, int totalReviews) onRatingChanged;
 
   const DetailContentView({
     required this.tabIndex,
     required this.product,
+    required this.onRatingChanged,
     super.key,
   });
 
@@ -210,6 +223,11 @@ class _DetailContentViewState extends State<DetailContentView> {
     setState(() {
       _reviews.insert(0, newReview); // 최신순으로 추가
     });
+
+    /// 리뷰 추가 후 평균 별점 계산 & 상위 콜백 호출
+    final sum = _reviews.fold(0.0, (acc, r) => acc + r.rating);
+    final average = sum / _reviews.length;
+    widget.onRatingChanged(average, _reviews.length);
   }
 
   void _openReviewModal() {

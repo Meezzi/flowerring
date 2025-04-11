@@ -21,6 +21,8 @@ class _DetailPageState extends State<DetailPage> {
   late QuantityController quantityController;
 
   int selectedTabIndex = 0; // 0 = 상품설명, 1 = 리뷰
+  double averageRating = 0.0;
+  int totalReviews = 0;
 
   @override
   void initState() {
@@ -38,6 +40,13 @@ class _DetailPageState extends State<DetailPage> {
   void dispose() {
     quantityController.dispose(); // 메모리 누수 방지
     super.dispose();
+  }
+
+  void updateRating(double newAverage, int newTotal) {
+    setState(() {
+      averageRating = newAverage;
+      totalReviews = newTotal;
+    });
   }
 
   Future<bool> handlePurchase() async {
@@ -119,7 +128,12 @@ class _DetailPageState extends State<DetailPage> {
           DetailImageSection(imageUrl: product.imageUrl),
 
           ///상세페이지 이미지
-          DetailInfoSection(product: product, controller: quantityController),
+          DetailInfoSection(
+            product: product,
+            controller: quantityController,
+            averageRating: averageRating,
+            totalReviews: totalReviews,
+          ),
 
           ///상세페이지 정보
           const SizedBox(height: 20),
@@ -130,7 +144,11 @@ class _DetailPageState extends State<DetailPage> {
           ),
 
           ///상세페이지 상품 설명 리뷰 설명
-          DetailContentView(tabIndex: selectedTabIndex, product: product),
+          DetailContentView(
+            tabIndex: selectedTabIndex,
+            product: product,
+            onRatingChanged: updateRating,
+          ),
           SizedBox(height: 30),
           Divider(height: 1),
         ],

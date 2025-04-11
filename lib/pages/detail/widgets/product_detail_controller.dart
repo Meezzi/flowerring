@@ -119,8 +119,10 @@ void showPaymentConfirmationDialog(
   );
 }
 
-///별 위젯
-Widget starScore(double rating) {
+/// 별 위젯
+Widget starScore(BuildContext context, double rating) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+
   return Row(
     mainAxisSize: MainAxisSize.min,
     children: [
@@ -137,7 +139,10 @@ Widget starScore(double rating) {
       const SizedBox(width: 4),
       Text(
         rating.toStringAsFixed(1),
-        style: const TextStyle(fontSize: 13, color: Colors.black),
+        style: TextStyle(
+          fontSize: 13,
+          color: isDark ? Colors.white : Colors.black, // 다크모드 대응
+        ),
       ),
     ],
   );
